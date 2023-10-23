@@ -10,7 +10,8 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("hello isaac");
+        String[] zeldaNamesArr = {"Link", "Zelda", "Ganondorf", "Impa", "Mipha", "Daruk", "Kass", "Riju","Sidon", "Yunobo"};
+//        String[] zeldaimagesArr = {"Link", "Zelda", "Ganondorf", "Impa", "Mipha", "Daruk", "Kass", "Riju","Sidon", "Yunobo"};
     }
     
 }
