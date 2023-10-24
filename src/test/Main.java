@@ -12,8 +12,13 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        String[] zeldaNamesArr = {"Link", "Zelda", "Ganondorf", "Impa", "Mipha", "Daruk", "Kass", "Riju", "Sidon", "Yunobo"};
-//        String[] zeldaimagesArr = {"Link", "Zelda", "Ganondorf", "Impa", "Mipha", "Daruk", "Kass", "Riju","Sidon", "Yunobo"};
+        int[] arr = {1,2,3,4};
+        
+        System.out.println(arr.length);
+        
+        
+        
+       
 
     }
 
