@@ -26,6 +26,11 @@ public class Process {
         this.strenght = strenght;
         this.agility = agility;
     }
+
+    @Override
+    public String toString() {
+        return "Process{" + "id=" + id + ", prioridad=" + prioridad + ", counter=" + counter + ", abilities=" + abilities + ", lifePoints=" + lifePoints + ", strenght=" + strenght + ", agility=" + agility + '}';
+    }
     
     
     
