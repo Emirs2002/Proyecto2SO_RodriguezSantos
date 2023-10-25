@@ -17,14 +17,11 @@ public class Chooser {
         for (int i = 0; i < tries; i++)
         {
             random = Math.random();
-            System.out.println("random " + random);
             for (int j = 0; j < probs.length; j++) 
             {
-                System.out.println("probabilidad " + probs[j]);
                 if (probs[j] > random) 
                 {
                     result += 1;
-                    System.out.println("result " + result);
                 }
             }
         }
