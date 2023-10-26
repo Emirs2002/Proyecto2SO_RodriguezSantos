@@ -10,20 +10,31 @@ package utilidades;
  */
 public class Chooser {
 
-    public int dice(int tries, double[] probs)
-    {
+    public int dice(int tries, double[] probs) {
         int result = 0;
         double random = 0;
-        for (int i = 0; i < tries; i++)
-        {
+        for (int i = 0; i < tries; i++) {
             random = Math.random();
-            for (int j = 0; j < probs.length; j++) 
-            {
-                if (probs[j] > random) 
-                {
+            for (int j = 0; j < probs.length; j++) {
+                if (probs[j] > random) {
                     result += 1;
                 }
             }
+        }
+
+        return result;
+    }
+
+    public int dice(int tries, double prob) {
+        int result = 0;
+        double random = 0;
+        for (int i = 0; i < tries; i++) {
+            random = Math.random();
+
+            if (prob > random) {
+                result += 1;
+            }
+
         }
 
         return result;
