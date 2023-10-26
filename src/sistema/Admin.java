@@ -15,15 +15,21 @@ public class Admin extends Thread {
     private String[] zeldaExcepArr = {"Link", "Zelda", "Ganondorf"};
     private String[] zeldaAvegArr = {"Impa", "Mipha", "Daruk", "Sidon"};
     private String[] zeldaLowArr = {"Kass", "Riju", "Yunobo"};
-
     //private cola1 Zelda
     //private cola2 Zelda
     //private cola3 Zelda
     //private colaRefuerzo Zelda
+
+    private String[] sfExcepArr = {"Ryu", "Zangief", "Chun-Li","Ken"};
+    private String[] sfAvegArr = {"Jurii", "Honda", "Blanka"};
+    private String[] sfLowArr = {"Guile", "Dee Jay", "Cammy"};
+
+    
     //private cola1 SF
     //private cola2 SF
     //private cola3 SF
     //private colaRefuerzo SF
+    
     private Semaphore mutex;
     private Chooser chooser;
     private double[] abilityProbArr = {0.6, 0.7, 0.5, 0.4};
@@ -74,22 +80,102 @@ public class Admin extends Thread {
                     System.out.println("resultado dado zelda:" + resultZ);
                     Process characterZelda = chooseZeldaArray(resultZ);
                     
-                    System.out.println("Personaje creado!!");
                     System.out.println(characterZelda);
                     
                     //crear SF6
-                    
+                    int resultSF = chooser.dice(1,abilityProbArr);
+                    System.out.println("resultado dado SF:" + resultSF);
+                    Process characterSF = chooseSFArray(resultSF);
+                    System.out.println(characterSF);
                     
                     //encolar ambos
-                    queuingCharacters(characterZelda,characterZelda);
-                } 
+                    queuingCharacters(characterZelda,characterSF);
+                }else{
+                    System.out.println("");
+                    System.out.println("no crea na");
+                }
                 
                 this.cycleCounter = 0;
             }
     }
             
 
-    public Process chooseZeldaArray(int result) {
+    public Process chooseSFArray(int result) {
+        Process psj = null;
+        ImageIcon icon;
+
+    
+        if (result == 0) { //deficientes
+            int num = getRandomNum(0, (sfLowArr.length) - 1);
+            switch (sfLowArr[num]) {
+                case "Guile":
+                    System.out.println("Guile");
+                    icon = new ImageIcon(getClass().getResource("/imagenes/SF/guile.gif"));
+                    psj = new Process(3, "Guile", icon, getRandomNum(15, 25), getRandomNum(30, 45), getRandomNum(10, 20), getRandomNum(20, 28));
+                    break;
+                case "Dee Jay":
+                    System.out.println("Dee Jay");
+                    icon = new ImageIcon(getClass().getResource("/imagenes/SF/deejay1.gif"));
+                    psj = new Process(3, "Dee Jay", icon, getRandomNum(20, 25), getRandomNum(17, 25), getRandomNum(21, 35), getRandomNum(22, 37));
+                    break;
+                case "Cammy":
+                    System.out.println("Cammy");
+                    icon = new ImageIcon(getClass().getResource("/imagenes/SF/cammy.gif"));
+                    psj = new Process(3, "Cammy", icon, getRandomNum(19, 30), getRandomNum(25, 35), getRandomNum(18, 24), getRandomNum(20, 26));
+                    break;
+            }
+
+        } else if (result >= 1 && result <= 3) { //promedio
+            int num = getRandomNum(0, (sfAvegArr.length) - 1);
+            switch (sfAvegArr[num]) {
+                case "Jurii":
+                    System.out.println("Jurii");
+                    icon = new ImageIcon(getClass().getResource("/imagenes/SF/juri.gif"));
+                    psj = new Process(2, "Jurii", icon, getRandomNum(55, 68), getRandomNum(50, 64), getRandomNum(50, 60), getRandomNum(40, 60));
+                    break;
+                case "Honda":
+                    System.out.println("Honda");
+                    icon = new ImageIcon(getClass().getResource("/imagenes/SF/e-honda.gif"));
+                    psj = new Process(2, "Honda", icon, getRandomNum(50, 65), getRandomNum(47, 68), getRandomNum(42, 65), getRandomNum(34, 50));
+                    break;
+                case "Blanka":
+                    System.out.println("Blanka");
+                    icon = new ImageIcon(getClass().getResource("/imagenes/SF/blanka.gif"));
+                    psj = new Process(2, "Blanka", icon, getRandomNum(45, 50), getRandomNum(70, 75), getRandomNum(65, 85), getRandomNum(50, 60));
+                    break;
+            }
+
+        } else if (result >= 4) { //excepcionales
+            int num = getRandomNum(0, (sfExcepArr.length) - 1);
+
+            switch (sfExcepArr[num]) {
+                case "Ryu":
+                    System.out.println("Ryu");
+                    icon = new ImageIcon(getClass().getResource("/imagenes/SF/RYU.gif"));
+                    psj = new Process(1, "Ryu", icon, getRandomNum(80, 100), getRandomNum(76, 100), getRandomNum(85, 100), getRandomNum(70, 100));
+                    break;
+                case "Zangief":
+                    System.out.println("Zangief");
+                    icon = new ImageIcon(getClass().getResource("/imagenes/SF/zangief.gif"));
+                    psj = new Process(1, "Zangief", icon, getRandomNum(67, 100), getRandomNum(80, 100), getRandomNum(89, 100), getRandomNum(63, 100));
+                    break;
+                case "Chun-Li":
+                    System.out.println("Chun-Li");
+                    icon = new ImageIcon(getClass().getResource("/imagenes/SF/chunli-street-fighter.gif"));
+                    psj = new Process(1, "Chun-Li", icon, getRandomNum(75, 100), getRandomNum(78, 100), getRandomNum(75, 100), getRandomNum(90, 100));
+                    break;
+                case "Ken":
+                    System.out.println("Ken");
+                    icon = new ImageIcon(getClass().getResource("/imagenes/SF/ken.gif"));
+                    psj = new Process(1, "Ken", icon, getRandomNum(84, 100), getRandomNum(76, 100), getRandomNum(88, 100), getRandomNum(78, 100));
+                    break;
+            }
+        }
+
+        return psj;
+    }
+
+    public Process chooseZeldaArray(int result){
         Process psj = null;
         ImageIcon icon;
 
@@ -161,11 +247,6 @@ public class Admin extends Thread {
         }
 
         return psj;
-    }
-
-    public Process chooseSFArray(int result){
-        //hacer codigo como el de arriba
-        return null;
     }
     
     public void queuingCharacters(Process psjZ, Process psjSF){
