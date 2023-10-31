@@ -94,43 +94,43 @@ public class Admin extends Thread {
 
         //crear zelda
         int resultZ = chooser.dice(1, abilityProbArr);
-        System.out.println("resultado dado zelda:" + resultZ);
-        Process characterZelda = chooseZeldaArray(resultZ);
+        //System.out.println("resultado dado zelda:" + resultZ);
+        Character characterZelda = chooseZeldaArray(resultZ);
         //System.out.println(characterZelda);
-        System.out.println("COLA ZELDA PRIORIDAD 1:");
-        this.cola3Zelda.mostrarCola();
+        //System.out.println("COLA ZELDA PRIORIDAD 1:");
+        //this.cola3Zelda.mostrarCola();
 
         //crear SF
         int resultSF = chooser.dice(1, abilityProbArr);
-        System.out.println("resultado dado SF:" + resultSF);
-        Process characterSF = chooseSFArray(resultSF);
+        //System.out.println("resultado dado SF:" + resultSF);
+        Character characterSF = chooseSFArray(resultSF);
         //System.out.println(characterSF);
-        System.out.println("COLA SF PRIORIDAD 3: ");
-        this.cola2SF.mostrarCola();
+        //System.out.println("COLA SF PRIORIDAD 3: ");
+        //this.cola2SF.mostrarCola();
 
     }
 
-    public Process chooseSFArray(int result) {
-        Process psj = null;
+    public Character chooseSFArray(int result) {
+        Character psj = null;
         ImageIcon icon;
 
         if (result == 0) { //deficientes
             int num = getRandomNum(0, (sfLowArr.length) - 1);
             switch (sfLowArr[num]) {
                 case "Guile":
-                    System.out.println("Guile");
+                    //System.out.println("Guile");
                     icon = new ImageIcon(getClass().getResource("/imagenes/SF/guile.gif"));
-                    psj = new Process(3, "Guile", icon, getRandomNum(15, 25), getRandomNum(30, 45), getRandomNum(10, 20), getRandomNum(20, 28), "sf");
+                    psj = new Character(3, "Guile", icon, getRandomNum(15, 25), getRandomNum(30, 45), getRandomNum(10, 20), getRandomNum(20, 28), "sf");
                     break;
                 case "Dee Jay":
-                    System.out.println("Dee Jay");
+                    //System.out.println("Dee Jay");
                     icon = new ImageIcon(getClass().getResource("/imagenes/SF/deejay1.gif"));
-                    psj = new Process(3, "Dee Jay", icon, getRandomNum(20, 25), getRandomNum(17, 25), getRandomNum(21, 35), getRandomNum(22, 37), "sf");
+                    psj = new Character(3, "Dee Jay", icon, getRandomNum(20, 25), getRandomNum(17, 25), getRandomNum(21, 35), getRandomNum(22, 37), "sf");
                     break;
                 case "Cammy":
-                    System.out.println("Cammy");
+                    //System.out.println("Cammy");
                     icon = new ImageIcon(getClass().getResource("/imagenes/SF/cammy.gif"));
-                    psj = new Process(3, "Cammy", icon, getRandomNum(19, 30), getRandomNum(25, 35), getRandomNum(18, 24), getRandomNum(20, 26), "sf");
+                    psj = new Character(3, "Cammy", icon, getRandomNum(19, 30), getRandomNum(25, 35), getRandomNum(18, 24), getRandomNum(20, 26), "sf");
                     break;
             }
             this.cola3SF.encolar(psj);
@@ -139,19 +139,19 @@ public class Admin extends Thread {
             int num = getRandomNum(0, (sfAvegArr.length) - 1);
             switch (sfAvegArr[num]) {
                 case "Jurii":
-                    System.out.println("Jurii");
+                    //System.out.println("Jurii");
                     icon = new ImageIcon(getClass().getResource("/imagenes/SF/juri.gif"));
-                    psj = new Process(2, "Jurii", icon, getRandomNum(55, 68), getRandomNum(50, 64), getRandomNum(50, 60), getRandomNum(40, 60), "sf");
+                    psj = new Character(2, "Jurii", icon, getRandomNum(55, 68), getRandomNum(50, 64), getRandomNum(50, 60), getRandomNum(40, 60), "sf");
                     break;
                 case "Honda":
-                    System.out.println("Honda");
+                    //System.out.println("Honda");
                     icon = new ImageIcon(getClass().getResource("/imagenes/SF/e-honda.gif"));
-                    psj = new Process(2, "Honda", icon, getRandomNum(50, 65), getRandomNum(47, 68), getRandomNum(42, 65), getRandomNum(34, 50), "sf");
+                    psj = new Character(2, "Honda", icon, getRandomNum(50, 65), getRandomNum(47, 68), getRandomNum(42, 65), getRandomNum(34, 50), "sf");
                     break;
                 case "Blanka":
-                    System.out.println("Blanka");
+                    //System.out.println("Blanka");
                     icon = new ImageIcon(getClass().getResource("/imagenes/SF/blanka.gif"));
-                    psj = new Process(2, "Blanka", icon, getRandomNum(45, 50), getRandomNum(70, 75), getRandomNum(65, 85), getRandomNum(50, 60), "sf");
+                    psj = new Character(2, "Blanka", icon, getRandomNum(45, 50), getRandomNum(70, 75), getRandomNum(65, 85), getRandomNum(50, 60), "sf");
                     break;
             }
             this.cola2SF.encolar(psj);
@@ -161,24 +161,24 @@ public class Admin extends Thread {
 
             switch (sfExcepArr[num]) {
                 case "Ryu":
-                    System.out.println("Ryu");
+                    //System.out.println("Ryu");
                     icon = new ImageIcon(getClass().getResource("/imagenes/SF/RYU.gif"));
-                    psj = new Process(1, "Ryu", icon, getRandomNum(80, 100), getRandomNum(76, 100), getRandomNum(85, 100), getRandomNum(70, 100), "sf");
+                    psj = new Character(1, "Ryu", icon, getRandomNum(80, 100), getRandomNum(76, 100), getRandomNum(85, 100), getRandomNum(70, 100), "sf");
                     break;
                 case "Zangief":
-                    System.out.println("Zangief");
+                    //System.out.println("Zangief");
                     icon = new ImageIcon(getClass().getResource("/imagenes/SF/zangief.gif"));
-                    psj = new Process(1, "Zangief", icon, getRandomNum(67, 100), getRandomNum(80, 100), getRandomNum(89, 100), getRandomNum(63, 100), "sf");
+                    psj = new Character(1, "Zangief", icon, getRandomNum(67, 100), getRandomNum(80, 100), getRandomNum(89, 100), getRandomNum(63, 100), "sf");
                     break;
                 case "Chun-Li":
-                    System.out.println("Chun-Li");
+                    //System.out.println("Chun-Li");
                     icon = new ImageIcon(getClass().getResource("/imagenes/SF/chunli-street-fighter.gif"));
-                    psj = new Process(1, "Chun-Li", icon, getRandomNum(75, 100), getRandomNum(78, 100), getRandomNum(75, 100), getRandomNum(90, 100), "sf");
+                    psj = new Character(1, "Chun-Li", icon, getRandomNum(75, 100), getRandomNum(78, 100), getRandomNum(75, 100), getRandomNum(90, 100), "sf");
                     break;
                 case "Ken":
-                    System.out.println("Ken");
+                    //System.out.println("Ken");
                     icon = new ImageIcon(getClass().getResource("/imagenes/SF/ken.gif"));
-                    psj = new Process(1, "Ken", icon, getRandomNum(84, 100), getRandomNum(76, 100), getRandomNum(88, 100), getRandomNum(78, 100), "sf");
+                    psj = new Character(1, "Ken", icon, getRandomNum(84, 100), getRandomNum(76, 100), getRandomNum(88, 100), getRandomNum(78, 100), "sf");
                     break;
             }
             this.cola1SF.encolar(psj);
@@ -187,27 +187,27 @@ public class Admin extends Thread {
         return psj;
     }
 
-    public Process chooseZeldaArray(int result) {
-        Process psj = null;
+    public Character chooseZeldaArray(int result) {
+        Character psj = null;
         ImageIcon icon;
 
         if (result == 0) { //deficientes
             int num = getRandomNum(0, (zeldaLowArr.length) - 1);
             switch (zeldaLowArr[num]) {
                 case "Kass":
-                    System.out.println("kass");
+                   // System.out.println("kass");
                     icon = new ImageIcon(getClass().getResource("/imagenes/ZELDA/kass.gif"));
-                    psj = new Process(3, "Kass", icon, getRandomNum(15, 30), getRandomNum(30, 45), getRandomNum(10, 20), getRandomNum(20, 30), "z");
+                    psj = new Character(3, "Kass", icon, getRandomNum(15, 30), getRandomNum(30, 45), getRandomNum(10, 20), getRandomNum(20, 30), "z");
                     break;
                 case "Riju":
-                    System.out.println("riju");
+                  //  System.out.println("riju");
                     icon = new ImageIcon(getClass().getResource("/imagenes/ZELDA/riju.gif"));
-                    psj = new Process(3, "Riju", icon, getRandomNum(20, 25), getRandomNum(25, 50), getRandomNum(12, 35), getRandomNum(22, 37), "z");
+                    psj = new Character(3, "Riju", icon, getRandomNum(20, 25), getRandomNum(25, 50), getRandomNum(12, 35), getRandomNum(22, 37), "z");
                     break;
                 case "Yunobo":
-                    System.out.println("yunobo");
+                   // System.out.println("yunobo");
                     icon = new ImageIcon(getClass().getResource("/imagenes/ZELDA/yunobo.gif"));
-                    psj = new Process(3, "Yunobo", icon, getRandomNum(14, 25), getRandomNum(10, 27), getRandomNum(25, 48), getRandomNum(16, 20), "z");
+                    psj = new Character(3, "Yunobo", icon, getRandomNum(14, 25), getRandomNum(10, 27), getRandomNum(25, 48), getRandomNum(16, 20), "z");
                     break;
             }
             this.cola3Zelda.encolar(psj);
@@ -216,24 +216,24 @@ public class Admin extends Thread {
             int num = getRandomNum(0, (zeldaAvegArr.length) - 1);
             switch (zeldaAvegArr[num]) {
                 case "Impa":
-                    System.out.println("Impa");
+                    //System.out.println("Impa");
                     icon = new ImageIcon(getClass().getResource("/imagenes/ZELDA/impa.gif"));
-                    psj = new Process(2, "Impa", icon, getRandomNum(55, 70), getRandomNum(47, 64), getRandomNum(56, 70), getRandomNum(45, 57), "z");
+                    psj = new Character(2, "Impa", icon, getRandomNum(55, 70), getRandomNum(47, 64), getRandomNum(56, 70), getRandomNum(45, 57), "z");
                     break;
                 case "Mipha":
-                    System.out.println("Mipha");
+                    //System.out.println("Mipha");
                     icon = new ImageIcon(getClass().getResource("/imagenes/ZELDA/mipha.gif"));
-                    psj = new Process(2, "Mipha", icon, getRandomNum(66, 80), getRandomNum(43, 55), getRandomNum(42, 54), getRandomNum(48, 65), "z");
+                    psj = new Character(2, "Mipha", icon, getRandomNum(66, 80), getRandomNum(43, 55), getRandomNum(42, 54), getRandomNum(48, 65), "z");
                     break;
                 case "Daruk":
-                    System.out.println("Daruk");
+                    //System.out.println("Daruk");
                     icon = new ImageIcon(getClass().getResource("/imagenes/ZELDA/daruk.png"));
-                    psj = new Process(2, "Daruk", icon, getRandomNum(45, 50), getRandomNum(70, 80), getRandomNum(85, 95), getRandomNum(35, 45), "z");
+                    psj = new Character(2, "Daruk", icon, getRandomNum(45, 50), getRandomNum(70, 80), getRandomNum(85, 95), getRandomNum(35, 45), "z");
                     break;
                 case "Sidon":
-                    System.out.println("Sidon");
+                    //System.out.println("Sidon");
                     icon = new ImageIcon(getClass().getResource("/imagenes/ZELDA/sidon.png"));
-                    psj = new Process(2, "Sidon", icon, getRandomNum(40, 56), getRandomNum(45, 56), getRandomNum(30, 45), getRandomNum(58, 70), "z");
+                    psj = new Character(2, "Sidon", icon, getRandomNum(40, 56), getRandomNum(45, 56), getRandomNum(30, 45), getRandomNum(58, 70), "z");
                     break;
             }
               this.cola2Zelda.encolar(psj);
@@ -243,19 +243,19 @@ public class Admin extends Thread {
 
             switch (zeldaExcepArr[num]) {
                 case "Link":
-                    System.out.println("link");
+                    //System.out.println("link");
                     icon = new ImageIcon(getClass().getResource("/imagenes/ZELDA/link.gif"));
-                    psj = new Process(1, "Link", icon, getRandomNum(69, 100), getRandomNum(80, 100), getRandomNum(85, 100), getRandomNum(90, 100), "z");
+                    psj = new Character(1, "Link", icon, getRandomNum(69, 100), getRandomNum(80, 100), getRandomNum(85, 100), getRandomNum(90, 100), "z");
                     break;
                 case "Zelda":
-                    System.out.println("zelda");
+                    //System.out.println("zelda");
                     icon = new ImageIcon(getClass().getResource("/imagenes/ZELDA/zelda.gif"));
-                    psj = new Process(1, "Zelda", icon, getRandomNum(85, 100), getRandomNum(80, 100), getRandomNum(73, 100), getRandomNum(75, 100), "z");
+                    psj = new Character(1, "Zelda", icon, getRandomNum(85, 100), getRandomNum(80, 100), getRandomNum(73, 100), getRandomNum(75, 100), "z");
                     break;
                 case "Ganondorf":
-                    System.out.println("ganon");
+                    //System.out.println("ganon");
                     icon = new ImageIcon(getClass().getResource("/imagenes/ZELDA/ganondorf.gif"));
-                    psj = new Process(1, "Ganondorf", icon, getRandomNum(90, 100), getRandomNum(85, 100), getRandomNum(88, 100), getRandomNum(89, 100), "z");
+                    psj = new Character(1, "Ganondorf", icon, getRandomNum(90, 100), getRandomNum(85, 100), getRandomNum(88, 100), getRandomNum(89, 100), "z");
                     break;
             }
             this.cola1Zelda.encolar(psj);

@@ -6,7 +6,7 @@ import javax.swing.ImageIcon;
  *
  * @author emirs
  */
-public class Process {
+public class Character {
     private String id;
     private int prioridad; //1,2,3
     private int counter;//max 8
@@ -20,7 +20,7 @@ public class Process {
     private static int zeldaCounter;
     private static int SFCounter;
 
-    public Process(int prioridad,String name, ImageIcon imagen, int abilities, int lifePoints, int strenght, int agility, String game) {
+    public Character(int prioridad,String name, ImageIcon imagen, int abilities, int lifePoints, int strenght, int agility, String game) {
         this.id = (game.equals("z")) ? "z" + ++zeldaCounter : "sf"+ ++SFCounter;
         this.name = name;
         this.prioridad = prioridad;
