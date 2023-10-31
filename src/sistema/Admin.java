@@ -5,6 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import utilidades.Chooser;
+import utilidades.Cola;
 
 /**
  *
@@ -15,19 +16,19 @@ public class Admin extends Thread {
     private String[] zeldaExcepArr = {"Link", "Zelda", "Ganondorf"};
     private String[] zeldaAvegArr = {"Impa", "Mipha", "Daruk", "Sidon"};
     private String[] zeldaLowArr = {"Kass", "Riju", "Yunobo"};
-    //private cola1 Zelda
-    //private cola2 Zelda
-    //private cola3 Zelda
-    //private colaRefuerzo Zelda
+    private Cola cola1Zelda = new Cola();
+    private Cola cola2Zelda = new Cola();
+    private Cola cola3Zelda = new Cola();
+    private Cola colaRefuerzoZelda = new Cola();
 
     private String[] sfExcepArr = {"Ryu", "Zangief", "Chun-Li", "Ken"};
     private String[] sfAvegArr = {"Jurii", "Honda", "Blanka"};
     private String[] sfLowArr = {"Guile", "Dee Jay", "Cammy"};
 
-    //private cola1 SF
-    //private cola2 SF
-    //private cola3 SF
-    //private colaRefuerzo SF
+    private Cola cola1SF = new Cola();
+    private Cola cola2SF = new Cola();
+    private Cola cola3SF = new Cola();
+    private Cola colaRefuerzoSF = new Cola();
     private Semaphore mutex;
     private Chooser chooser;
     private double[] abilityProbArr = {0.6, 0.7, 0.5, 0.4};
@@ -95,17 +96,17 @@ public class Admin extends Thread {
         int resultZ = chooser.dice(1, abilityProbArr);
         System.out.println("resultado dado zelda:" + resultZ);
         Process characterZelda = chooseZeldaArray(resultZ);
-
-        System.out.println(characterZelda);
+        //System.out.println(characterZelda);
+        System.out.println("COLA ZELDA PRIORIDAD 1:");
+        this.cola3Zelda.mostrarCola();
 
         //crear SF
         int resultSF = chooser.dice(1, abilityProbArr);
         System.out.println("resultado dado SF:" + resultSF);
         Process characterSF = chooseSFArray(resultSF);
-        System.out.println(characterSF);
-
-        //encolar ambos
-        queuingCharacters(characterZelda, characterSF);
+        //System.out.println(characterSF);
+        System.out.println("COLA SF PRIORIDAD 3: ");
+        this.cola2SF.mostrarCola();
 
     }
 
@@ -132,7 +133,8 @@ public class Admin extends Thread {
                     psj = new Process(3, "Cammy", icon, getRandomNum(19, 30), getRandomNum(25, 35), getRandomNum(18, 24), getRandomNum(20, 26), "sf");
                     break;
             }
-
+            this.cola3SF.encolar(psj);
+            
         } else if (result >= 1 && result <= 3) { //promedio
             int num = getRandomNum(0, (sfAvegArr.length) - 1);
             switch (sfAvegArr[num]) {
@@ -152,6 +154,7 @@ public class Admin extends Thread {
                     psj = new Process(2, "Blanka", icon, getRandomNum(45, 50), getRandomNum(70, 75), getRandomNum(65, 85), getRandomNum(50, 60), "sf");
                     break;
             }
+            this.cola2SF.encolar(psj);
 
         } else if (result >= 4) { //excepcionales
             int num = getRandomNum(0, (sfExcepArr.length) - 1);
@@ -178,6 +181,7 @@ public class Admin extends Thread {
                     psj = new Process(1, "Ken", icon, getRandomNum(84, 100), getRandomNum(76, 100), getRandomNum(88, 100), getRandomNum(78, 100), "sf");
                     break;
             }
+            this.cola1SF.encolar(psj);
         }
 
         return psj;
@@ -206,6 +210,7 @@ public class Admin extends Thread {
                     psj = new Process(3, "Yunobo", icon, getRandomNum(14, 25), getRandomNum(10, 27), getRandomNum(25, 48), getRandomNum(16, 20), "z");
                     break;
             }
+            this.cola3Zelda.encolar(psj);
 
         } else if (result >= 1 && result <= 3) { //promedio
             int num = getRandomNum(0, (zeldaAvegArr.length) - 1);
@@ -231,6 +236,7 @@ public class Admin extends Thread {
                     psj = new Process(2, "Sidon", icon, getRandomNum(40, 56), getRandomNum(45, 56), getRandomNum(30, 45), getRandomNum(58, 70), "z");
                     break;
             }
+              this.cola2Zelda.encolar(psj);
 
         } else if (result >= 4) { //excepcionales
             int num = getRandomNum(0, (zeldaExcepArr.length) - 1);
@@ -252,15 +258,13 @@ public class Admin extends Thread {
                     psj = new Process(1, "Ganondorf", icon, getRandomNum(90, 100), getRandomNum(85, 100), getRandomNum(88, 100), getRandomNum(89, 100), "z");
                     break;
             }
+            this.cola1Zelda.encolar(psj);
         }
 
         return psj;
     }
 
-    public void queuingCharacters(Process psjZ, Process psjSF) {
-        System.out.println("personajes se encolan");
-        //encolar los personajes
-    }
+
 
     public int getRandomNum(int min, int max) {
         int num = min + (int) (Math.random() * ((max - min) + 1));
