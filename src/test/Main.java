@@ -14,9 +14,9 @@ public class Main {
      */
     public static void main(String[] args) {
         
-        Admin so = new Admin();
+       // Admin so = new Admin();
         
-        so.start();
+       // so.start();
         
         
        

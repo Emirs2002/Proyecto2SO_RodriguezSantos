@@ -30,11 +30,59 @@ public class Character {
         this.strenght = strenght;
         this.agility = agility;
     }
-    
+
     
     @Override
     public String toString() {
         return "Process{" + "id=" + id + ", prioridad=" + prioridad + ", name=" + name + ", abilities=" + abilities + ", lifePoints=" + lifePoints + ", strenght=" + strenght + ", agility=" + agility + '}';
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public int getPrioridad() {
+        return prioridad;
+    }
+
+    public int getCounter() {
+        return counter;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getGame() {
+        return game;
+    }
+
+    public ImageIcon getImagen() {
+        return imagen;
+    }
+
+    public int getAbilities() {
+        return abilities;
+    }
+
+    public int getLifePoints() {
+        return lifePoints;
+    }
+
+    public int getStrenght() {
+        return strenght;
+    }
+
+    public int getAgility() {
+        return agility;
+    }
+
+    public static int getZeldaCounter() {
+        return zeldaCounter;
+    }
+
+    public static int getSFCounter() {
+        return SFCounter;
     }
 
     

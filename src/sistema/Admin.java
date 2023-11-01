@@ -16,39 +16,52 @@ public class Admin extends Thread {
     private String[] zeldaExcepArr = {"Link", "Zelda", "Ganondorf"};
     private String[] zeldaAvegArr = {"Impa", "Mipha", "Daruk", "Sidon"};
     private String[] zeldaLowArr = {"Kass", "Riju", "Yunobo"};
-    private Cola cola1Zelda = new Cola();
-    private Cola cola2Zelda = new Cola();
-    private Cola cola3Zelda = new Cola();
-    private Cola colaRefuerzoZelda = new Cola();
+
+    private Cola cola1Zelda;
+    private Cola cola2Zelda;
+    private Cola cola3Zelda;
+    private Cola colaRefuerzoZelda;
 
     private String[] sfExcepArr = {"Ryu", "Zangief", "Chun-Li", "Ken"};
     private String[] sfAvegArr = {"Jurii", "Honda", "Blanka"};
     private String[] sfLowArr = {"Guile", "Dee Jay", "Cammy"};
 
-    private Cola cola1SF = new Cola();
-    private Cola cola2SF = new Cola();
-    private Cola cola3SF = new Cola();
-    private Cola colaRefuerzoSF = new Cola();
+    private Cola cola1SF;
+    private Cola cola2SF;
+    private Cola cola3SF;
+    private Cola colaRefuerzoSF;
+
     private Semaphore mutex;
     private Chooser chooser;
     private double[] abilityProbArr = {0.6, 0.7, 0.5, 0.4};
     private int cycleCounter;
 
-    public Admin() {
+
+
+    public Admin(Cola cola1Zelda, Cola cola2Zelda, Cola cola3Zelda, Cola colaRefuerzoZelda, Cola cola1SF, Cola cola2SF, Cola cola3SF, Cola colaRefuerzoSF, Semaphore mutex) {
+        this.cola1Zelda = cola1Zelda;
+        this.cola2Zelda = cola2Zelda;
+        this.cola3Zelda = cola3Zelda;
+        this.colaRefuerzoZelda = colaRefuerzoZelda;
+        this.cola1SF = cola1SF;
+        this.cola2SF = cola2SF;
+        this.cola3SF = cola3SF;
+        this.colaRefuerzoSF = colaRefuerzoSF;
+        this.mutex = mutex;
         this.chooser = new Chooser();
         this.cycleCounter = 0;
     }
 
     @Override
     public void run() {
-        
+
         //cargar 10 procesos de cada empresa en el sistema
         int count = 0;
         while (count < 10) {
             createCharacters();
             count++;
         }
-        
+
         while (true) {
 
             checkCycle();
@@ -76,16 +89,16 @@ public class Admin extends Thread {
             //calcular probabilidad de que se cree un nuevo psj
             int create = chooser.dice(1, 0.8);
             System.out.println("crear psj: " + create);
-            
-                if (create == 1) {
-                    
-                    createCharacters();                    
-                   
-                }else{
-                    System.out.println("");
-                    System.out.println("no se crea na");
-                }
-                
+
+            if (create == 1) {
+
+                createCharacters();
+
+            } else {
+                System.out.println("");
+                System.out.println("no se crea na");
+            }
+
             this.cycleCounter = 0;
         }
     }
@@ -134,7 +147,7 @@ public class Admin extends Thread {
                     break;
             }
             this.cola3SF.encolar(psj);
-            
+
         } else if (result >= 1 && result <= 3) { //promedio
             int num = getRandomNum(0, (sfAvegArr.length) - 1);
             switch (sfAvegArr[num]) {
@@ -195,17 +208,17 @@ public class Admin extends Thread {
             int num = getRandomNum(0, (zeldaLowArr.length) - 1);
             switch (zeldaLowArr[num]) {
                 case "Kass":
-                   // System.out.println("kass");
+                    // System.out.println("kass");
                     icon = new ImageIcon(getClass().getResource("/imagenes/ZELDA/kass.gif"));
                     psj = new Character(3, "Kass", icon, getRandomNum(15, 30), getRandomNum(30, 45), getRandomNum(10, 20), getRandomNum(20, 30), "z");
                     break;
                 case "Riju":
-                  //  System.out.println("riju");
+                    //  System.out.println("riju");
                     icon = new ImageIcon(getClass().getResource("/imagenes/ZELDA/riju.gif"));
                     psj = new Character(3, "Riju", icon, getRandomNum(20, 25), getRandomNum(25, 50), getRandomNum(12, 35), getRandomNum(22, 37), "z");
                     break;
                 case "Yunobo":
-                   // System.out.println("yunobo");
+                    // System.out.println("yunobo");
                     icon = new ImageIcon(getClass().getResource("/imagenes/ZELDA/yunobo.gif"));
                     psj = new Character(3, "Yunobo", icon, getRandomNum(14, 25), getRandomNum(10, 27), getRandomNum(25, 48), getRandomNum(16, 20), "z");
                     break;
@@ -236,7 +249,7 @@ public class Admin extends Thread {
                     psj = new Character(2, "Sidon", icon, getRandomNum(40, 56), getRandomNum(45, 56), getRandomNum(30, 45), getRandomNum(58, 70), "z");
                     break;
             }
-              this.cola2Zelda.encolar(psj);
+            this.cola2Zelda.encolar(psj);
 
         } else if (result >= 4) { //excepcionales
             int num = getRandomNum(0, (zeldaExcepArr.length) - 1);
@@ -263,8 +276,6 @@ public class Admin extends Thread {
 
         return psj;
     }
-
-
 
     public int getRandomNum(int min, int max) {
         int num = min + (int) (Math.random() * ((max - min) + 1));
