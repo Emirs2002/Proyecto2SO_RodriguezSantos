@@ -94,7 +94,6 @@ public class Cola {
     //Devolver index del vertice
     public Object desencolar() {
         Nodo aux = front;    
-        System.out.println(front.getData());
         Object index = aux.getData();
         if (!esVacio()) {
             front = front.pnext;

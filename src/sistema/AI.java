@@ -43,7 +43,7 @@ public class AI extends Thread {
 
         while (true) {
             //COMBATIR
-            if (Z1.esVacio() && SF1.esVacio()) {
+            if (Z1.esVacio() || SF1.esVacio()) {
                 System.out.println("ALGUNA COLA VACIA");
             } else {
                 System.out.println("EN COMBATE: ");
@@ -82,6 +82,13 @@ public class AI extends Thread {
             }
             System.out.println("FINALIZO EL COMBATE");
             mutex.release();
+            
+            System.out.println("cola zelda:");
+            System.out.println("");
+            Z1.mostrarCola();
+            System.out.println("cola sf:");
+            System.out.println("");
+            SF1.mostrarCola();
 
         } catch (InterruptedException ex) {
             Logger.getLogger(AI.class.getName()).log(Level.SEVERE, null, ex);
@@ -91,8 +98,8 @@ public class AI extends Thread {
     //Esta funcion determina el ganador de un combate
     public void winner() {
 
-        Character zelda = (Character) Z1.getFront().getData();
-        Character SF = (Character) SF1.getFront().getData();
+        Character zelda = (Character) Z1.desencolar();
+        Character SF = (Character) SF1.desencolar();
         int Zpoints = 0;
         int SFpoints = 0;
         double random = Math.random();
@@ -122,20 +129,31 @@ public class AI extends Thread {
         }
 
         if (Zpoints > SFpoints) {
+            System.out.println("");
+            System.out.println("ganador zelda: " + zelda);
             winners.addAtEnd(new Nodo(zelda));
-            Object loser = SF1.desencolar();
+            
+            Character loser = SF;
         } else if (SFpoints > Zpoints) {
+            System.out.println("");
+            System.out.println("ganador sf: " + SF);
             winners.addAtEnd(new Nodo(SF));
-            Object loser = Z1.desencolar();
+            
+            Character loser = zelda;
         } else if (SFpoints == Zpoints) {
             if (random <= 0.50) {
+                System.out.println("");
+                System.out.println("ganador zelda: " + zelda);
                 winners.addAtEnd(new Nodo(zelda));
-                Object loser = SF1.desencolar();
+                Character loser = SF;
             } else {
+                System.out.println("");
+                System.out.println("ganador sf: " + SF);
                 winners.addAtEnd(new Nodo(SF));
-                Object loser = Z1.desencolar();
+                Character loser = zelda;
             }
         }
+        
     }
 
     public void tie() {
@@ -143,11 +161,13 @@ public class AI extends Thread {
         Character SF = (Character) SF1.desencolar();
         Z1.encolar(zelda);
         SF1.encolar(SF);
+        
     }
 
     public void noCombat() {
         Character zelda = (Character) Z1.desencolar();
         Character SF = (Character) SF1.desencolar();
+        
         ZRefuerzo.encolar(zelda);
         SFRefuerzo.encolar(SF);
 
