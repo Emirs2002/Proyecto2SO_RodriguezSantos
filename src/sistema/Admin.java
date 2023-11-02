@@ -36,14 +36,14 @@ public class Admin extends Thread {
     private double[] abilityProbArr = {0.6, 0.7, 0.5, 0.4};
     private int cycleCounter;
 
-    public Admin(Cola cola1Zelda, Cola cola2Zelda, Cola cola3Zelda, Cola colaRefuerzoZelda, Cola cola1SF, Cola cola2SF, Cola cola3SF, Cola colaRefuerzoSF, Semaphore mutex) {
-        this.cola1Zelda = cola1Zelda;
-        this.cola2Zelda = cola2Zelda;
-        this.cola3Zelda = cola3Zelda;
+    public Admin(Semaphore mutex, Cola[] zeldaColaArr, Cola[] sfColaArr, Cola colaRefuerzoZelda, Cola colaRefuerzoSF) {
+        this.cola1Zelda = zeldaColaArr[0];
+        this.cola2Zelda = zeldaColaArr[1];
+        this.cola3Zelda = zeldaColaArr[2];
         this.colaRefuerzoZelda = colaRefuerzoZelda;
-        this.cola1SF = cola1SF;
-        this.cola2SF = cola2SF;
-        this.cola3SF = cola3SF;
+        this.cola1SF = sfColaArr[0];
+        this.cola2SF = sfColaArr[1];
+        this.cola3SF = sfColaArr[2];
         this.colaRefuerzoSF = colaRefuerzoSF;
         this.mutex = mutex;
         this.chooser = new Chooser();
@@ -59,8 +59,6 @@ public class Admin extends Thread {
             createCharacters();
             count++;
         }
-        cola1Zelda.mostrarCola();
-        cola1SF.mostrarCola();
         while (true) {
             checkCycle();
 
@@ -76,9 +74,12 @@ public class Admin extends Thread {
 
         try {
             mutex.acquire();
+            System.out.println("");
+            System.out.println("----------------ENTRA SISTEMA OPERATIVO---------------");
+            System.out.println("");
             if (this.cycleCounter < 2) {
 
-                //revisa
+                //revisa 
                 System.out.println("");
                 System.out.println("revisa estado sistema");
                 this.cycleCounter++;
@@ -104,27 +105,22 @@ public class Admin extends Thread {
         } catch (InterruptedException ex) {
             Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //evaluar si han pasado dos ciclos de revision
-
+        
     }
 
     public void createCharacters() {
 
         //crear zelda
         int resultZ = chooser.dice(1, abilityProbArr);
-        //System.out.println("resultado dado zelda:" + resultZ);
         Character characterZelda = chooseZeldaArray(resultZ);
-        //System.out.println(characterZelda);
-        //System.out.println("COLA ZELDA PRIORIDAD 1:");
-        //this.cola3Zelda.mostrarCola();
+        System.out.println("");
+        System.out.println("characterZelda = " + characterZelda);
 
         //crear SF
         int resultSF = chooser.dice(1, abilityProbArr);
-        //System.out.println("resultado dado SF:" + resultSF);
         Character characterSF = chooseSFArray(resultSF);
-        //System.out.println(characterSF);
-        //System.out.println("COLA SF PRIORIDAD 3: ");
-        //this.cola2SF.mostrarCola();
+        System.out.println("");
+        System.out.println("characterSF = " + characterSF);
 
     }
 
