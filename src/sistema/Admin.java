@@ -4,8 +4,7 @@ import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import utilidades.Chooser;
-import utilidades.Cola;
+import utilidades.*;
 
 /**
  *
@@ -21,6 +20,7 @@ public class Admin extends Thread {
     private Cola cola2Zelda;
     private Cola cola3Zelda;
     private Cola colaRefuerzoZelda;
+    private Cola[] zeldaColaArr;
 
     private String[] sfExcepArr = {"Ryu", "Zangief", "Chun-Li", "Ken"};
     private String[] sfAvegArr = {"Jurii", "Honda", "Blanka"};
@@ -30,6 +30,7 @@ public class Admin extends Thread {
     private Cola cola2SF;
     private Cola cola3SF;
     private Cola colaRefuerzoSF;
+    private Cola[] sfColaArr;
 
     private Semaphore mutex;
     private Chooser chooser;
@@ -41,10 +42,14 @@ public class Admin extends Thread {
         this.cola2Zelda = zeldaColaArr[1];
         this.cola3Zelda = zeldaColaArr[2];
         this.colaRefuerzoZelda = colaRefuerzoZelda;
+        this.zeldaColaArr = zeldaColaArr;
+        
         this.cola1SF = sfColaArr[0];
         this.cola2SF = sfColaArr[1];
         this.cola3SF = sfColaArr[2];
         this.colaRefuerzoSF = colaRefuerzoSF;
+        this.sfColaArr = sfColaArr;
+        
         this.mutex = mutex;
         this.chooser = new Chooser();
         this.cycleCounter = 0;
@@ -77,11 +82,24 @@ public class Admin extends Thread {
             System.out.println("");
             System.out.println("----------------ENTRA SISTEMA OPERATIVO---------------");
             System.out.println("");
+            
+            
             if (this.cycleCounter < 2) {
 
-                //revisa 
+                //revisar el estado del sistema
                 System.out.println("");
                 System.out.println("revisa estado sistema");
+                
+                updateCounter(this.zeldaColaArr);
+                updateCounter(this.sfColaArr);
+
+                System.out.println("");
+                System.out.println("COLA 2 ZELDA");
+                this.cola2Zelda.mostrarCola();
+                System.out.println("");
+                System.out.println("COLA 3 ZELDA");
+                this.cola3Zelda.mostrarCola();
+                
                 this.cycleCounter++;
 
             } else {
@@ -282,5 +300,22 @@ public class Admin extends Thread {
         int num = min + (int) (Math.random() * ((max - min) + 1));
         return num;
     }
+    
+    public void updateCounter(Cola[] colaArr){
+        for (int i = 1; i < colaArr.length; i++) {
+            Cola cola = colaArr[i];
+            Nodo temp = cola.getFront();
 
+            while (temp != null) {
+                System.out.println(temp.getData());
+
+                Character chara = (Character) temp.getData();
+                chara.sumCounter();
+
+                temp = temp.getPnext();
+            }
+        }
+        
+    }
+            
 }

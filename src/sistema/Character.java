@@ -7,10 +7,10 @@ import javax.swing.ImageIcon;
  * @author emirs
  */
 public class Character {
-    private String id;
+    private final String id;
     private int prioridad; //1,2,3
     private int counter;//max 8
-    private String name;
+    private final String name;
     private String game;
     public ImageIcon imagen;
     private int abilities; //60%
@@ -31,10 +31,13 @@ public class Character {
         this.agility = agility;
     }
 
-    
     @Override
     public String toString() {
-        return "Process{" + "id=" + id + ", prioridad=" + prioridad + ", name=" + name + ", abilities=" + abilities + ", lifePoints=" + lifePoints + ", strenght=" + strenght + ", agility=" + agility + '}';
+        return "Character{" + "id=" + id + ", prioridad=" + prioridad + ", counter=" + counter + ", name=" + name + ", abilities=" + abilities + ", lifePoints=" + lifePoints + ", strenght=" + strenght + ", agility=" + agility + '}';
+    }
+    
+    public void sumCounter(){
+        this.counter++;
     }
 
     public String getId() {
@@ -45,8 +48,16 @@ public class Character {
         return prioridad;
     }
 
+    public void setPrioridad(int prioridad) {
+        this.prioridad = prioridad;
+    }
+
     public int getCounter() {
         return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
     }
 
     public String getName() {
@@ -57,33 +68,43 @@ public class Character {
         return game;
     }
 
-    public ImageIcon getImagen() {
-        return imagen;
+    public void setGame(String game) {
+        this.game = game;
     }
 
     public int getAbilities() {
         return abilities;
     }
 
+    public void setAbilities(int abilities) {
+        this.abilities = abilities;
+    }
+
     public int getLifePoints() {
         return lifePoints;
+    }
+
+    public void setLifePoints(int lifePoints) {
+        this.lifePoints = lifePoints;
     }
 
     public int getStrenght() {
         return strenght;
     }
 
+    public void setStrenght(int strenght) {
+        this.strenght = strenght;
+    }
+
     public int getAgility() {
         return agility;
     }
 
-    public static int getZeldaCounter() {
-        return zeldaCounter;
+    public void setAgility(int agility) {
+        this.agility = agility;
     }
 
-    public static int getSFCounter() {
-        return SFCounter;
-    }
+   
 
     
     
