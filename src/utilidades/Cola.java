@@ -93,7 +93,7 @@ public class Cola {
     //Eliminar de la cola
     //Devolver index del vertice
     public Object desencolar() {
-        Nodo aux = front;        
+        Nodo aux = front;    
         Object index = aux.getData();
         if (!esVacio()) {
             front = front.pnext;
@@ -101,6 +101,7 @@ public class Cola {
         }
     return index;
     }
+    
 
     //Invertir cola
     public void invertCola() {

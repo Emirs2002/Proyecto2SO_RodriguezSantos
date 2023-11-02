@@ -24,7 +24,7 @@ public class Chooser {
 
         return result;
     }
-
+    
     public int dice(int tries, double prob) {
         int result = 0;
         double random = 0;
