@@ -112,7 +112,7 @@ public class Lista {
                 temp = proximoNodo(temp);               
                 
                }
-            JOptionPane.showMessageDialog(null,print);
+            System.out.println(print);
    
             }
         }

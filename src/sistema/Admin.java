@@ -36,8 +36,6 @@ public class Admin extends Thread {
     private double[] abilityProbArr = {0.6, 0.7, 0.5, 0.4};
     private int cycleCounter;
 
-
-
     public Admin(Cola cola1Zelda, Cola cola2Zelda, Cola cola3Zelda, Cola colaRefuerzoZelda, Cola cola1SF, Cola cola2SF, Cola cola3SF, Cola colaRefuerzoSF, Semaphore mutex) {
         this.cola1Zelda = cola1Zelda;
         this.cola2Zelda = cola2Zelda;
@@ -61,9 +59,9 @@ public class Admin extends Thread {
             createCharacters();
             count++;
         }
-
+        cola1Zelda.mostrarCola();
+        cola1SF.mostrarCola();
         while (true) {
-
             checkCycle();
 
             try {
@@ -76,31 +74,38 @@ public class Admin extends Thread {
 
     public void checkCycle() {
 
-        //evaluar si han pasado dos ciclos de revision
-        if (this.cycleCounter < 2) {
+        try {
+            mutex.acquire();
+            if (this.cycleCounter < 2) {
 
-            //revisa
-            System.out.println("");
-            System.out.println("revisa estado sistema");
-            this.cycleCounter++;
-
-        } else {
-
-            //calcular probabilidad de que se cree un nuevo psj
-            int create = chooser.dice(1, 0.8);
-            System.out.println("crear psj: " + create);
-
-            if (create == 1) {
-
-                createCharacters();
+                //revisa
+                System.out.println("");
+                System.out.println("revisa estado sistema");
+                this.cycleCounter++;
 
             } else {
-                System.out.println("");
-                System.out.println("no se crea na");
-            }
 
-            this.cycleCounter = 0;
+                //calcular probabilidad de que se cree un nuevo psj
+                int create = chooser.dice(1, 0.8);
+                System.out.println("crear psj: " + create);
+
+                if (create == 1) {
+
+                    createCharacters();
+
+                } else {
+                    System.out.println("");
+                    System.out.println("no se crea na");
+                }
+
+                this.cycleCounter = 0;
+            }
+            mutex.release();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //evaluar si han pasado dos ciclos de revision
+
     }
 
     public void createCharacters() {
