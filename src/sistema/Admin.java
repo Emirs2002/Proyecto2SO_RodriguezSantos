@@ -91,9 +91,6 @@ public class Admin extends Thread {
                 System.out.println("");
                 System.out.println("revisa estado sistema");
                 
-//                System.out.println("");
-//                System.out.println("COLA 3 ZELDA");
-//                this.cola3Zelda.mostrarCola();
                 
                 this.cycleCounter++;
 
@@ -376,18 +373,27 @@ public class Admin extends Thread {
     }
     
     public void checkBackUpQueue(){
-        //tirar dado para ver si un personaje sale de la cola
-        int result = chooser.dice(1, 0.4);
-        System.out.println("dado refuerzo: " + result);
+        //tirar dados para ver si un personaje sale de las colas
+        int resultz = chooser.dice(1, 0.4);
         
-        if(result == 1){
-            System.out.println("SALEN DE REFUERZO");
+        int resultsf = chooser.dice(1, 0.4);
+        
+        if(resultz == 1){
+            System.out.println("SALE DE REFUERZO ZELDA");
             
             if(!this.colaRefuerzoZelda.esVacio()){
                 Character zelda = (Character) this.colaRefuerzoZelda.desencolar();
                 System.out.println("zelda refuerzo = " + zelda);
                 this.cola1Zelda.encolar(zelda);
             }
+            
+        }else{
+            System.out.println("no sale psj zelda");
+        }
+        
+        if(resultsf == 1){
+            System.out.println("SALE DE REFUERZO SF");
+            
             if(!this.colaRefuerzoSF.esVacio()){
                 Character sf = (Character) this.colaRefuerzoSF.desencolar();
                 System.out.println("sf refuerzo = " + sf );
@@ -396,7 +402,7 @@ public class Admin extends Thread {
             }
             
         }else{
-            System.out.println("nadie sale");
+            System.out.println("no sale psj sf");
         }
     }
             

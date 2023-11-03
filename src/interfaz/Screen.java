@@ -4,6 +4,14 @@
  */
 package interfaz;
 
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author emirs
@@ -15,6 +23,19 @@ public class Screen extends javax.swing.JFrame {
      */
     public Screen() {
         initComponents();
+        Font zeldaFont = null;
+        try {
+            zeldaFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getClassLoader().getResourceAsStream("fonts/The Wild Breath of Zelda.otf"));
+            
+            Font zeldaFontTitle = zeldaFont.deriveFont(Font.BOLD,20);
+            zeldaTitle.setFont(zeldaFontTitle); 
+        } catch (FontFormatException ex) {
+            ex.printStackTrace(System.out);
+        } catch (IOException ex) {
+            ex.printStackTrace(System.out);
+        }
+        
+        
     }
 
     /**
@@ -35,66 +56,66 @@ public class Screen extends javax.swing.JFrame {
         priority2Z = new javax.swing.JTextArea();
         jScrollPane12 = new javax.swing.JScrollPane();
         priority1Z = new javax.swing.JTextArea();
-        jLabel1 = new javax.swing.JLabel();
+        mainTitleZelda = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        zeldaTitle = new javax.swing.JLabel();
         adjustSpeed = new javax.swing.JSlider();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         victoriesZ = new javax.swing.JTextField();
         VictoriesSF = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        zBackupLabel = new javax.swing.JLabel();
+        victoriesSfLabel = new javax.swing.JLabel();
+        sfTitle = new javax.swing.JLabel();
+        mainTitleSf = new javax.swing.JLabel();
+        victoriesZLabel = new javax.swing.JLabel();
         showWinners = new javax.swing.JButton();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        zPriority1Label = new javax.swing.JLabel();
+        zPriority2Label = new javax.swing.JLabel();
+        zPriority3Label = new javax.swing.JLabel();
         exitB = new javax.swing.JButton();
-        jLabel15 = new javax.swing.JLabel();
+        sfPriority1Label = new javax.swing.JLabel();
         jScrollPane13 = new javax.swing.JScrollPane();
         priority1SF = new javax.swing.JTextArea();
-        jLabel16 = new javax.swing.JLabel();
+        sfPriority2Label = new javax.swing.JLabel();
         jScrollPane14 = new javax.swing.JScrollPane();
         priority2SF = new javax.swing.JTextArea();
-        jLabel17 = new javax.swing.JLabel();
+        sfPriority3Label = new javax.swing.JLabel();
         jScrollPane16 = new javax.swing.JScrollPane();
         priorityBackupSF = new javax.swing.JTextArea();
         jScrollPane15 = new javax.swing.JScrollPane();
         priority3SF = new javax.swing.JTextArea();
-        jLabel18 = new javax.swing.JLabel();
-        chosenCharaZelda = new javax.swing.JLabel();
-        chosenCharaSF = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        jLabel37 = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
-        jLabel39 = new javax.swing.JLabel();
-        jLabel40 = new javax.swing.JLabel();
-        jLabel41 = new javax.swing.JLabel();
-        jLabel42 = new javax.swing.JLabel();
-        jLabel43 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
-        jLabel36 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
-        jLabel34 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
+        sfBackupLabel = new javax.swing.JLabel();
+        chosenCharaImageZ = new javax.swing.JLabel();
+        chosenCharaImageSF = new javax.swing.JLabel();
+        sfIdLabel = new javax.swing.JLabel();
+        sfNameLabel = new javax.swing.JLabel();
+        sfPriorityLabel = new javax.swing.JLabel();
+        sfLifeLabel = new javax.swing.JLabel();
+        sfAbilityLabel = new javax.swing.JLabel();
+        sfStrenghtLabel = new javax.swing.JLabel();
+        sfAgilityLabel = new javax.swing.JLabel();
+        sfId = new javax.swing.JLabel();
+        sfName = new javax.swing.JLabel();
+        sfPriority = new javax.swing.JLabel();
+        sfLife = new javax.swing.JLabel();
+        sfAbility = new javax.swing.JLabel();
+        sfStrenght = new javax.swing.JLabel();
+        sfAgility = new javax.swing.JLabel();
+        zeldaAgilityLabel = new javax.swing.JLabel();
+        zeldaIdLabel = new javax.swing.JLabel();
+        zeldaAgility = new javax.swing.JLabel();
+        zeldaNameLabel = new javax.swing.JLabel();
+        zeldaStrenghtLabel = new javax.swing.JLabel();
+        zeldaPriorityLabel = new javax.swing.JLabel();
+        zeldaAbilityLabel = new javax.swing.JLabel();
+        zeldaLifeLabel = new javax.swing.JLabel();
+        zeldaId = new javax.swing.JLabel();
+        zeldaStrenght = new javax.swing.JLabel();
+        zeldaName = new javax.swing.JLabel();
+        zeldaPriority = new javax.swing.JLabel();
+        zeldaLife = new javax.swing.JLabel();
+        zeldaAbility = new javax.swing.JLabel();
         fondoZ = new javax.swing.JLabel();
         fondoSF = new javax.swing.JLabel();
 
@@ -135,21 +156,21 @@ public class Screen extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 250, 50));
 
-        jLabel1.setFont(new java.awt.Font("The Wild Breath of Zelda", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel1.setText("GAME OF ");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 40, 140, -1));
+        mainTitleZelda.setFont(new java.awt.Font("The Wild Breath of Zelda", 1, 36)); // NOI18N
+        mainTitleZelda.setForeground(new java.awt.Color(51, 51, 51));
+        mainTitleZelda.setText("GAME OF ");
+        jPanel1.add(mainTitleZelda, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 40, 140, -1));
 
         jLabel4.setFont(new java.awt.Font("The Wild Breath of Zelda", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(153, 51, 255));
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/gif perder.gif"))); // NOI18N
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 250, 190, -1));
 
-        jLabel2.setFont(new java.awt.Font("The Wild Breath of Zelda", 0, 20)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("THE LEGEND OF ZELDA: TEARS OF THE KINGDOM");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
+        zeldaTitle.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        zeldaTitle.setForeground(new java.awt.Color(51, 51, 51));
+        zeldaTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        zeldaTitle.setText("THE LEGEND OF ZELDA: TEARS OF THE KINGDOM");
+        jPanel1.add(zeldaTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
         jPanel1.add(adjustSpeed, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 560, -1, -1));
 
         jTextArea1.setColumns(20);
@@ -176,30 +197,30 @@ public class Screen extends javax.swing.JFrame {
         });
         jPanel1.add(VictoriesSF, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 470, 50, 40));
 
-        jLabel11.setFont(new java.awt.Font("The Wild Breath of Zelda", 0, 18)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel11.setText("Refuerzo");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, -1));
+        zBackupLabel.setFont(new java.awt.Font("The Wild Breath of Zelda", 0, 18)); // NOI18N
+        zBackupLabel.setForeground(new java.awt.Color(0, 0, 0));
+        zBackupLabel.setText("Refuerzo");
+        jPanel1.add(zBackupLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Brutal Font Pro", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("VICTORIAS SF6");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 450, -1, -1));
+        victoriesSfLabel.setFont(new java.awt.Font("Brutal Font Pro", 0, 14)); // NOI18N
+        victoriesSfLabel.setForeground(new java.awt.Color(255, 255, 255));
+        victoriesSfLabel.setText("VICTORIAS SF6");
+        jPanel1.add(victoriesSfLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 450, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Brutal Font Pro", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(241, 182, 185));
-        jLabel5.setText("STREET FIGHTER 6");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 40, -1, -1));
+        sfTitle.setFont(new java.awt.Font("Brutal Font Pro", 1, 18)); // NOI18N
+        sfTitle.setForeground(new java.awt.Color(241, 182, 185));
+        sfTitle.setText("STREET FIGHTER 6");
+        jPanel1.add(sfTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 40, -1, -1));
 
-        jLabel7.setFont(new java.awt.Font("Brutal Font Pro", 1, 32)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("THE YEAR");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 40, 190, 40));
+        mainTitleSf.setFont(new java.awt.Font("Brutal Font Pro", 1, 32)); // NOI18N
+        mainTitleSf.setForeground(new java.awt.Color(255, 255, 255));
+        mainTitleSf.setText("THE YEAR");
+        jPanel1.add(mainTitleSf, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 40, 190, 40));
 
-        jLabel10.setFont(new java.awt.Font("The Wild Breath of Zelda", 0, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel10.setText("VICTORIAS TLOZ");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 450, -1, -1));
+        victoriesZLabel.setFont(new java.awt.Font("The Wild Breath of Zelda", 0, 14)); // NOI18N
+        victoriesZLabel.setForeground(new java.awt.Color(0, 0, 0));
+        victoriesZLabel.setText("VICTORIAS TLOZ");
+        jPanel1.add(victoriesZLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 450, -1, -1));
 
         showWinners.setText("Mostrar ganadores");
         showWinners.addActionListener(new java.awt.event.ActionListener() {
@@ -209,20 +230,20 @@ public class Screen extends javax.swing.JFrame {
         });
         jPanel1.add(showWinners, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 470, 150, 50));
 
-        jLabel12.setFont(new java.awt.Font("The Wild Breath of Zelda", 0, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel12.setText("Prioridad 1");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
+        zPriority1Label.setFont(new java.awt.Font("The Wild Breath of Zelda", 0, 18)); // NOI18N
+        zPriority1Label.setForeground(new java.awt.Color(0, 0, 0));
+        zPriority1Label.setText("Prioridad 1");
+        jPanel1.add(zPriority1Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
-        jLabel13.setFont(new java.awt.Font("The Wild Breath of Zelda", 0, 18)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel13.setText("Prioridad 2");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
+        zPriority2Label.setFont(new java.awt.Font("The Wild Breath of Zelda", 0, 18)); // NOI18N
+        zPriority2Label.setForeground(new java.awt.Color(0, 0, 0));
+        zPriority2Label.setText("Prioridad 2");
+        jPanel1.add(zPriority2Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
 
-        jLabel14.setFont(new java.awt.Font("The Wild Breath of Zelda", 0, 18)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel14.setText("Prioridad 3");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
+        zPriority3Label.setFont(new java.awt.Font("The Wild Breath of Zelda", 0, 18)); // NOI18N
+        zPriority3Label.setForeground(new java.awt.Color(0, 0, 0));
+        zPriority3Label.setText("Prioridad 3");
+        jPanel1.add(zPriority3Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
 
         exitB.setText("Salir");
         exitB.addActionListener(new java.awt.event.ActionListener() {
@@ -232,10 +253,10 @@ public class Screen extends javax.swing.JFrame {
         });
         jPanel1.add(exitB, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 610, 60, 30));
 
-        jLabel15.setFont(new java.awt.Font("Brutal Font Pro", 0, 18)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 197, 190));
-        jLabel15.setText("Prioridad 1");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 80, -1, -1));
+        sfPriority1Label.setFont(new java.awt.Font("Brutal Font Pro", 0, 18)); // NOI18N
+        sfPriority1Label.setForeground(new java.awt.Color(255, 197, 190));
+        sfPriority1Label.setText("Prioridad 1");
+        jPanel1.add(sfPriority1Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 80, -1, -1));
 
         priority1SF.setColumns(20);
         priority1SF.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -245,10 +266,10 @@ public class Screen extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane13, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 100, 250, 50));
 
-        jLabel16.setFont(new java.awt.Font("Brutal Font Pro", 0, 18)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(255, 197, 190));
-        jLabel16.setText("Prioridad 2");
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 160, -1, -1));
+        sfPriority2Label.setFont(new java.awt.Font("Brutal Font Pro", 0, 18)); // NOI18N
+        sfPriority2Label.setForeground(new java.awt.Color(255, 197, 190));
+        sfPriority2Label.setText("Prioridad 2");
+        jPanel1.add(sfPriority2Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 160, -1, -1));
 
         priority2SF.setColumns(20);
         priority2SF.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -258,10 +279,10 @@ public class Screen extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane14, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 180, 250, 50));
 
-        jLabel17.setFont(new java.awt.Font("Brutal Font Pro", 0, 18)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(255, 197, 190));
-        jLabel17.setText("Prioridad 3");
-        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 240, -1, -1));
+        sfPriority3Label.setFont(new java.awt.Font("Brutal Font Pro", 0, 18)); // NOI18N
+        sfPriority3Label.setForeground(new java.awt.Color(255, 197, 190));
+        sfPriority3Label.setText("Prioridad 3");
+        jPanel1.add(sfPriority3Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 240, -1, -1));
 
         priorityBackupSF.setColumns(20);
         priorityBackupSF.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -279,148 +300,148 @@ public class Screen extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane15, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 260, 250, 50));
 
-        jLabel18.setFont(new java.awt.Font("Brutal Font Pro", 0, 18)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(255, 197, 190));
-        jLabel18.setText("Refuerzo");
-        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 320, -1, -1));
+        sfBackupLabel.setFont(new java.awt.Font("Brutal Font Pro", 0, 18)); // NOI18N
+        sfBackupLabel.setForeground(new java.awt.Color(255, 197, 190));
+        sfBackupLabel.setText("Refuerzo");
+        jPanel1.add(sfBackupLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 320, -1, -1));
 
-        chosenCharaZelda.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        chosenCharaZelda.setForeground(new java.awt.Color(0, 0, 0));
-        chosenCharaZelda.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        chosenCharaZelda.setText("IMAGEN");
-        jPanel1.add(chosenCharaZelda, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 460, 120, 130));
+        chosenCharaImageZ.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        chosenCharaImageZ.setForeground(new java.awt.Color(0, 0, 0));
+        chosenCharaImageZ.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        chosenCharaImageZ.setText("IMAGEN");
+        jPanel1.add(chosenCharaImageZ, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 460, 120, 130));
 
-        chosenCharaSF.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        chosenCharaSF.setForeground(new java.awt.Color(255, 255, 255));
-        chosenCharaSF.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        chosenCharaSF.setText("IMAGEN");
-        jPanel1.add(chosenCharaSF, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 470, 120, 130));
+        chosenCharaImageSF.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        chosenCharaImageSF.setForeground(new java.awt.Color(255, 255, 255));
+        chosenCharaImageSF.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        chosenCharaImageSF.setText("IMAGEN");
+        jPanel1.add(chosenCharaImageSF, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 470, 120, 130));
 
-        jLabel23.setFont(new java.awt.Font("Brutal Font Pro", 0, 13)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel23.setText("ID");
-        jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 460, -1, -1));
+        sfIdLabel.setFont(new java.awt.Font("Brutal Font Pro", 0, 13)); // NOI18N
+        sfIdLabel.setForeground(new java.awt.Color(255, 255, 255));
+        sfIdLabel.setText("ID");
+        jPanel1.add(sfIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 460, -1, -1));
 
-        jLabel24.setFont(new java.awt.Font("Brutal Font Pro", 0, 13)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel24.setText("NOMBRE");
-        jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 480, -1, -1));
+        sfNameLabel.setFont(new java.awt.Font("Brutal Font Pro", 0, 13)); // NOI18N
+        sfNameLabel.setForeground(new java.awt.Color(255, 255, 255));
+        sfNameLabel.setText("NOMBRE");
+        jPanel1.add(sfNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 480, -1, -1));
 
-        jLabel25.setFont(new java.awt.Font("Brutal Font Pro", 0, 13)); // NOI18N
-        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel25.setText("PRIORIDAD");
-        jPanel1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 500, -1, -1));
+        sfPriorityLabel.setFont(new java.awt.Font("Brutal Font Pro", 0, 13)); // NOI18N
+        sfPriorityLabel.setForeground(new java.awt.Color(255, 255, 255));
+        sfPriorityLabel.setText("PRIORIDAD");
+        jPanel1.add(sfPriorityLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 500, -1, -1));
 
-        jLabel26.setFont(new java.awt.Font("Brutal Font Pro", 0, 13)); // NOI18N
-        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel26.setText("VIDA");
-        jPanel1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 520, -1, -1));
+        sfLifeLabel.setFont(new java.awt.Font("Brutal Font Pro", 0, 13)); // NOI18N
+        sfLifeLabel.setForeground(new java.awt.Color(255, 255, 255));
+        sfLifeLabel.setText("VIDA");
+        jPanel1.add(sfLifeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 520, -1, -1));
 
-        jLabel27.setFont(new java.awt.Font("Brutal Font Pro", 0, 13)); // NOI18N
-        jLabel27.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel27.setText("HABILIDADES");
-        jPanel1.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 540, -1, -1));
+        sfAbilityLabel.setFont(new java.awt.Font("Brutal Font Pro", 0, 13)); // NOI18N
+        sfAbilityLabel.setForeground(new java.awt.Color(255, 255, 255));
+        sfAbilityLabel.setText("HABILIDADES");
+        jPanel1.add(sfAbilityLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 540, -1, -1));
 
-        jLabel28.setFont(new java.awt.Font("Brutal Font Pro", 0, 13)); // NOI18N
-        jLabel28.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel28.setText("FUERZA");
-        jPanel1.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 560, -1, -1));
+        sfStrenghtLabel.setFont(new java.awt.Font("Brutal Font Pro", 0, 13)); // NOI18N
+        sfStrenghtLabel.setForeground(new java.awt.Color(255, 255, 255));
+        sfStrenghtLabel.setText("FUERZA");
+        jPanel1.add(sfStrenghtLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 560, -1, -1));
 
-        jLabel29.setFont(new java.awt.Font("Brutal Font Pro", 0, 13)); // NOI18N
-        jLabel29.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel29.setText("AGILIDAD");
-        jPanel1.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 580, -1, -1));
+        sfAgilityLabel.setFont(new java.awt.Font("Brutal Font Pro", 0, 13)); // NOI18N
+        sfAgilityLabel.setForeground(new java.awt.Color(255, 255, 255));
+        sfAgilityLabel.setText("AGILIDAD");
+        jPanel1.add(sfAgilityLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 580, -1, -1));
 
-        jLabel37.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel37.setText("jLabel30");
-        jPanel1.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 460, -1, -1));
+        sfId.setForeground(new java.awt.Color(255, 255, 255));
+        sfId.setText("jLabel30");
+        jPanel1.add(sfId, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 460, -1, -1));
 
-        jLabel38.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel38.setText("jLabel30");
-        jPanel1.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 480, -1, -1));
+        sfName.setForeground(new java.awt.Color(255, 255, 255));
+        sfName.setText("jLabel30");
+        jPanel1.add(sfName, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 480, -1, -1));
 
-        jLabel39.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel39.setText("jLabel30");
-        jPanel1.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 500, -1, -1));
+        sfPriority.setForeground(new java.awt.Color(255, 255, 255));
+        sfPriority.setText("jLabel30");
+        jPanel1.add(sfPriority, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 500, -1, -1));
 
-        jLabel40.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel40.setText("jLabel30");
-        jPanel1.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 520, -1, -1));
+        sfLife.setForeground(new java.awt.Color(255, 255, 255));
+        sfLife.setText("jLabel30");
+        jPanel1.add(sfLife, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 520, -1, -1));
 
-        jLabel41.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel41.setText("jLabel30");
-        jPanel1.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 540, -1, -1));
+        sfAbility.setForeground(new java.awt.Color(255, 255, 255));
+        sfAbility.setText("jLabel30");
+        jPanel1.add(sfAbility, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 540, -1, -1));
 
-        jLabel42.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel42.setText("jLabel30");
-        jPanel1.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 560, -1, -1));
+        sfStrenght.setForeground(new java.awt.Color(255, 255, 255));
+        sfStrenght.setText("jLabel30");
+        jPanel1.add(sfStrenght, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 560, -1, -1));
 
-        jLabel43.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel43.setText("jLabel30");
-        jPanel1.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 580, -1, -1));
+        sfAgility.setForeground(new java.awt.Color(255, 255, 255));
+        sfAgility.setText("jLabel30");
+        jPanel1.add(sfAgility, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 580, -1, -1));
 
-        jLabel6.setFont(new java.awt.Font("The Wild Breath of Zelda", 0, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("AGILIDAD");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 580, -1, -1));
+        zeldaAgilityLabel.setFont(new java.awt.Font("The Wild Breath of Zelda", 0, 14)); // NOI18N
+        zeldaAgilityLabel.setForeground(new java.awt.Color(255, 255, 255));
+        zeldaAgilityLabel.setText("AGILIDAD");
+        jPanel1.add(zeldaAgilityLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 580, -1, -1));
 
-        jLabel8.setFont(new java.awt.Font("The Wild Breath of Zelda", 0, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("ID");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 460, -1, -1));
+        zeldaIdLabel.setFont(new java.awt.Font("The Wild Breath of Zelda", 0, 14)); // NOI18N
+        zeldaIdLabel.setForeground(new java.awt.Color(255, 255, 255));
+        zeldaIdLabel.setText("ID");
+        jPanel1.add(zeldaIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 460, -1, -1));
 
-        jLabel30.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel30.setText("jLabel30");
-        jPanel1.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 580, -1, -1));
+        zeldaAgility.setForeground(new java.awt.Color(0, 0, 0));
+        zeldaAgility.setText("jLabel30");
+        jPanel1.add(zeldaAgility, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 580, -1, -1));
 
-        jLabel9.setFont(new java.awt.Font("The Wild Breath of Zelda", 0, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("NOMBRE");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 480, -1, -1));
+        zeldaNameLabel.setFont(new java.awt.Font("The Wild Breath of Zelda", 0, 14)); // NOI18N
+        zeldaNameLabel.setForeground(new java.awt.Color(255, 255, 255));
+        zeldaNameLabel.setText("NOMBRE");
+        jPanel1.add(zeldaNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 480, -1, -1));
 
-        jLabel22.setFont(new java.awt.Font("The Wild Breath of Zelda", 0, 14)); // NOI18N
-        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel22.setText("FUERZA");
-        jPanel1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 560, -1, -1));
+        zeldaStrenghtLabel.setFont(new java.awt.Font("The Wild Breath of Zelda", 0, 14)); // NOI18N
+        zeldaStrenghtLabel.setForeground(new java.awt.Color(255, 255, 255));
+        zeldaStrenghtLabel.setText("FUERZA");
+        jPanel1.add(zeldaStrenghtLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 560, -1, -1));
 
-        jLabel19.setFont(new java.awt.Font("The Wild Breath of Zelda", 0, 14)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel19.setText("PRIORIDAD");
-        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 500, -1, -1));
+        zeldaPriorityLabel.setFont(new java.awt.Font("The Wild Breath of Zelda", 0, 14)); // NOI18N
+        zeldaPriorityLabel.setForeground(new java.awt.Color(255, 255, 255));
+        zeldaPriorityLabel.setText("PRIORIDAD");
+        jPanel1.add(zeldaPriorityLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 500, -1, -1));
 
-        jLabel21.setFont(new java.awt.Font("The Wild Breath of Zelda", 0, 14)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel21.setText("HABILIDADES");
-        jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 540, -1, -1));
+        zeldaAbilityLabel.setFont(new java.awt.Font("The Wild Breath of Zelda", 0, 14)); // NOI18N
+        zeldaAbilityLabel.setForeground(new java.awt.Color(255, 255, 255));
+        zeldaAbilityLabel.setText("HABILIDADES");
+        jPanel1.add(zeldaAbilityLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 540, -1, -1));
 
-        jLabel20.setFont(new java.awt.Font("The Wild Breath of Zelda", 0, 14)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel20.setText("VIDA");
-        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 520, -1, -1));
+        zeldaLifeLabel.setFont(new java.awt.Font("The Wild Breath of Zelda", 0, 14)); // NOI18N
+        zeldaLifeLabel.setForeground(new java.awt.Color(255, 255, 255));
+        zeldaLifeLabel.setText("VIDA");
+        jPanel1.add(zeldaLifeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 520, -1, -1));
 
-        jLabel31.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel31.setText("jLabel30");
-        jPanel1.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 460, -1, -1));
+        zeldaId.setForeground(new java.awt.Color(0, 0, 0));
+        zeldaId.setText("jLabel30");
+        jPanel1.add(zeldaId, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 460, -1, -1));
 
-        jLabel36.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel36.setText("jLabel30");
-        jPanel1.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 560, -1, -1));
+        zeldaStrenght.setForeground(new java.awt.Color(0, 0, 0));
+        zeldaStrenght.setText("jLabel30");
+        jPanel1.add(zeldaStrenght, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 560, -1, -1));
 
-        jLabel32.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel32.setText("jLabel30");
-        jPanel1.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 480, -1, -1));
+        zeldaName.setForeground(new java.awt.Color(0, 0, 0));
+        zeldaName.setText("jLabel30");
+        jPanel1.add(zeldaName, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 480, -1, -1));
 
-        jLabel33.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel33.setText("jLabel30");
-        jPanel1.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 500, -1, -1));
+        zeldaPriority.setForeground(new java.awt.Color(0, 0, 0));
+        zeldaPriority.setText("jLabel30");
+        jPanel1.add(zeldaPriority, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 500, -1, -1));
 
-        jLabel34.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel34.setText("jLabel30");
-        jPanel1.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 520, -1, -1));
+        zeldaLife.setForeground(new java.awt.Color(0, 0, 0));
+        zeldaLife.setText("jLabel30");
+        jPanel1.add(zeldaLife, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 520, -1, -1));
 
-        jLabel35.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel35.setText("jLabel30");
-        jPanel1.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 540, -1, -1));
+        zeldaAbility.setForeground(new java.awt.Color(0, 0, 0));
+        zeldaAbility.setText("jLabel30");
+        jPanel1.add(zeldaAbility, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 540, -1, -1));
 
         fondoZ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/zelda.jpg"))); // NOI18N
         jPanel1.add(fondoZ, new org.netbeans.lib.awtextra.AbsoluteConstraints(-530, -90, 1110, 750));
@@ -452,54 +473,12 @@ public class Screen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField VictoriesSF;
     private javax.swing.JSlider adjustSpeed;
-    private javax.swing.JLabel chosenCharaSF;
-    private javax.swing.JLabel chosenCharaZelda;
+    private javax.swing.JLabel chosenCharaImageSF;
+    private javax.swing.JLabel chosenCharaImageZ;
     private javax.swing.JButton exitB;
     private javax.swing.JLabel fondoSF;
     private javax.swing.JLabel fondoZ;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
@@ -511,6 +490,8 @@ public class Screen extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane16;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel mainTitleSf;
+    private javax.swing.JLabel mainTitleZelda;
     private javax.swing.JTextArea priority1SF;
     private javax.swing.JTextArea priority1Z;
     private javax.swing.JTextArea priority2SF;
@@ -519,7 +500,47 @@ public class Screen extends javax.swing.JFrame {
     private javax.swing.JTextArea priority3Z;
     private javax.swing.JTextArea priorityBackupSF;
     private javax.swing.JTextArea priorityBackupZ;
+    private javax.swing.JLabel sfAbility;
+    private javax.swing.JLabel sfAbilityLabel;
+    private javax.swing.JLabel sfAgility;
+    private javax.swing.JLabel sfAgilityLabel;
+    private javax.swing.JLabel sfBackupLabel;
+    private javax.swing.JLabel sfId;
+    private javax.swing.JLabel sfIdLabel;
+    private javax.swing.JLabel sfLife;
+    private javax.swing.JLabel sfLifeLabel;
+    private javax.swing.JLabel sfName;
+    private javax.swing.JLabel sfNameLabel;
+    private javax.swing.JLabel sfPriority;
+    private javax.swing.JLabel sfPriority1Label;
+    private javax.swing.JLabel sfPriority2Label;
+    private javax.swing.JLabel sfPriority3Label;
+    private javax.swing.JLabel sfPriorityLabel;
+    private javax.swing.JLabel sfStrenght;
+    private javax.swing.JLabel sfStrenghtLabel;
+    private javax.swing.JLabel sfTitle;
     private javax.swing.JButton showWinners;
+    private javax.swing.JLabel victoriesSfLabel;
     private javax.swing.JTextField victoriesZ;
+    private javax.swing.JLabel victoriesZLabel;
+    private javax.swing.JLabel zBackupLabel;
+    private javax.swing.JLabel zPriority1Label;
+    private javax.swing.JLabel zPriority2Label;
+    private javax.swing.JLabel zPriority3Label;
+    private javax.swing.JLabel zeldaAbility;
+    private javax.swing.JLabel zeldaAbilityLabel;
+    private javax.swing.JLabel zeldaAgility;
+    private javax.swing.JLabel zeldaAgilityLabel;
+    private javax.swing.JLabel zeldaId;
+    private javax.swing.JLabel zeldaIdLabel;
+    private javax.swing.JLabel zeldaLife;
+    private javax.swing.JLabel zeldaLifeLabel;
+    private javax.swing.JLabel zeldaName;
+    private javax.swing.JLabel zeldaNameLabel;
+    private javax.swing.JLabel zeldaPriority;
+    private javax.swing.JLabel zeldaPriorityLabel;
+    private javax.swing.JLabel zeldaStrenght;
+    private javax.swing.JLabel zeldaStrenghtLabel;
+    private javax.swing.JLabel zeldaTitle;
     // End of variables declaration//GEN-END:variables
 }
