@@ -4,8 +4,7 @@ import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import utilidades.Chooser;
-import utilidades.Cola;
+import utilidades.*;
 
 /**
  *
@@ -21,6 +20,7 @@ public class Admin extends Thread {
     private Cola cola2Zelda;
     private Cola cola3Zelda;
     private Cola colaRefuerzoZelda;
+    private Cola[] zeldaColaArr;
 
     private String[] sfExcepArr = {"Ryu", "Zangief", "Chun-Li", "Ken"};
     private String[] sfAvegArr = {"Jurii", "Honda", "Blanka"};
@@ -30,6 +30,7 @@ public class Admin extends Thread {
     private Cola cola2SF;
     private Cola cola3SF;
     private Cola colaRefuerzoSF;
+    private Cola[] sfColaArr;
 
     private Semaphore mutex;
     private Chooser chooser;
@@ -41,10 +42,14 @@ public class Admin extends Thread {
         this.cola2Zelda = zeldaColaArr[1];
         this.cola3Zelda = zeldaColaArr[2];
         this.colaRefuerzoZelda = colaRefuerzoZelda;
+        this.zeldaColaArr = zeldaColaArr;
+        
         this.cola1SF = sfColaArr[0];
         this.cola2SF = sfColaArr[1];
         this.cola3SF = sfColaArr[2];
         this.colaRefuerzoSF = colaRefuerzoSF;
+        this.sfColaArr = sfColaArr;
+        
         this.mutex = mutex;
         this.chooser = new Chooser();
         this.cycleCounter = 0;
@@ -77,11 +82,16 @@ public class Admin extends Thread {
             System.out.println("");
             System.out.println("----------------ENTRA SISTEMA OPERATIVO---------------");
             System.out.println("");
+            
+            organizeQueues();
+            
             if (this.cycleCounter < 2) {
 
-                //revisa 
+                //revisar el estado del sistema
                 System.out.println("");
                 System.out.println("revisa estado sistema");
+                
+                
                 this.cycleCounter++;
 
             } else {
@@ -103,7 +113,7 @@ public class Admin extends Thread {
             }
             mutex.release();
         } catch (InterruptedException ex) {
-            Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace(System.out);
         }
         
     }
@@ -282,5 +292,118 @@ public class Admin extends Thread {
         int num = min + (int) (Math.random() * ((max - min) + 1));
         return num;
     }
+    
+    public void organizeQueues(){
+        
+        checkCounter(this.zeldaColaArr);
+        checkCounter(this.sfColaArr);
+        
+        System.out.println("Despues checkCounter");
+        System.out.println("");
+        System.out.println("COLA 1 ZELDA");
+        this.cola1Zelda.mostrarCola();
+        
+        System.out.println("");
+        System.out.println("COLA 2 ZELDA");
+        this.cola2Zelda.mostrarCola();
+        
+        System.out.println("");
+        System.out.println("COLA 3 ZELDA");
+        this.cola3Zelda.mostrarCola();
 
+        updateCounter(this.zeldaColaArr);
+        updateCounter(this.sfColaArr);
+        
+        //Gestionar la cola de refuerzo
+        checkBackUpQueue();
+    }
+    
+    //sumarle 1 al contador de los personajes de prioridad 2 y 3
+    public void updateCounter(Cola[] colaArr){
+        for (int i = 1; i < colaArr.length; i++) {
+            Cola cola = colaArr[i];
+            Nodo temp = cola.getFront();
+
+            while (temp != null) {
+
+                Character chara = (Character) temp.getData();
+                chara.sumCounter();
+
+                temp = temp.getPnext();
+            }
+        }
+        
+    }
+    
+    //ver el valor del contador y asignarlo al siguiente nivel de prioridad
+    public void checkCounter(Cola[] colaArr){
+        for (int i = 1; i < colaArr.length; i++) {
+            Cola cola = colaArr[i];
+            Nodo temp = cola.getFront();
+            Nodo aux;
+
+            while (temp != null) {
+               
+                Character chara = (Character) temp.getData();
+                
+                //si el contador llega a su max, se encola en la cola superior
+                if(chara.getCounter() == 8){
+                    
+                    temp = temp.getPnext();
+                    //desencolar nodo
+                    cola.desencolar();
+                
+                    if(chara.getPrioridad() == 2){
+                        chara.setCounter(0);
+                        chara.setPrioridad(1);
+                        colaArr[0].encolar(chara);
+                    }else if(chara.getPrioridad() == 3){
+                        chara.setCounter(0);
+                        chara.setPrioridad(2);
+                        colaArr[1].encolar(chara);
+                        
+                    }
+                }else{
+                    break;
+                }
+
+            }
+        }
+        
+    }
+    
+    public void checkBackUpQueue(){
+        //tirar dados para ver si un personaje sale de las colas
+        int resultz = chooser.dice(1, 0.4);
+        
+        int resultsf = chooser.dice(1, 0.4);
+        
+        if(resultz == 1){
+            System.out.println("SALE DE REFUERZO ZELDA");
+            
+            if(!this.colaRefuerzoZelda.esVacio()){
+                Character zelda = (Character) this.colaRefuerzoZelda.desencolar();
+                System.out.println("zelda refuerzo = " + zelda);
+                this.cola1Zelda.encolar(zelda);
+            }
+            
+        }else{
+            System.out.println("no sale psj zelda");
+        }
+        
+        if(resultsf == 1){
+            System.out.println("SALE DE REFUERZO SF");
+            
+            if(!this.colaRefuerzoSF.esVacio()){
+                Character sf = (Character) this.colaRefuerzoSF.desencolar();
+                System.out.println("sf refuerzo = " + sf );
+                this.cola1SF.encolar(sf);
+                
+            }
+            
+        }else{
+            System.out.println("no sale psj sf");
+        }
+    }
+            
 }
