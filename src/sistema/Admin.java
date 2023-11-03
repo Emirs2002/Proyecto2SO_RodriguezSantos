@@ -296,6 +296,31 @@ public class Admin extends Thread {
         return num;
     }
     
+    public void organizeQueues(){
+        
+        checkCounter(this.zeldaColaArr);
+        checkCounter(this.sfColaArr);
+        
+        System.out.println("Despues checkCounter");
+        System.out.println("");
+        System.out.println("COLA 1 ZELDA");
+        this.cola1Zelda.mostrarCola();
+        
+        System.out.println("");
+        System.out.println("COLA 2 ZELDA");
+        this.cola2Zelda.mostrarCola();
+        
+        System.out.println("");
+        System.out.println("COLA 3 ZELDA");
+        this.cola3Zelda.mostrarCola();
+
+        updateCounter(this.zeldaColaArr);
+        updateCounter(this.sfColaArr);
+        
+        //Gestionar la cola de refuerzo
+        checkBackUpQueue();
+    }
+    
     //sumarle 1 al contador de los personajes de prioridad 2 y 3
     public void updateCounter(Cola[] colaArr){
         for (int i = 1; i < colaArr.length; i++) {
@@ -350,27 +375,29 @@ public class Admin extends Thread {
         
     }
     
-    public void organizeQueues(){
+    public void checkBackUpQueue(){
+        //tirar dado para ver si un personaje sale de la cola
+        int result = chooser.dice(1, 0.4);
+        System.out.println("dado refuerzo: " + result);
         
-        checkCounter(this.zeldaColaArr);
-        checkCounter(this.sfColaArr);
-        
-//        System.out.println("Despues checkCounter");
-//        System.out.println("");
-//        System.out.println("COLA 1 ZELDA");
-//        this.cola1Zelda.mostrarCola();
-//        
-//        System.out.println("");
-//        System.out.println("COLA 2 ZELDA");
-//        this.cola2Zelda.mostrarCola();
-//        
-//        System.out.println("");
-//        System.out.println("COLA 3 ZELDA");
-//        this.cola3Zelda.mostrarCola();
-
-        updateCounter(this.zeldaColaArr);
-        updateCounter(this.sfColaArr);
+        if(result == 1){
+            System.out.println("SALEN DE REFUERZO");
+            
+            if(!this.colaRefuerzoZelda.esVacio()){
+                Character zelda = (Character) this.colaRefuerzoZelda.desencolar();
+                System.out.println("zelda refuerzo = " + zelda);
+                this.cola1Zelda.encolar(zelda);
+            }
+            if(!this.colaRefuerzoSF.esVacio()){
+                Character sf = (Character) this.colaRefuerzoSF.desencolar();
+                System.out.println("sf refuerzo = " + sf );
+                this.cola1SF.encolar(sf);
                 
+            }
+            
+        }else{
+            System.out.println("nadie sale");
+        }
     }
             
 }

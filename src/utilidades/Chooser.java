@@ -16,7 +16,7 @@ public class Chooser {
         for (int i = 0; i < tries; i++) {
             random = Math.random();
             for (int j = 0; j < probs.length; j++) {
-                if (probs[j] > random) {
+                if (probs[j] >= random) {
                     result += 1;
                 }
             }
@@ -31,7 +31,7 @@ public class Chooser {
         for (int i = 0; i < tries; i++) {
             random = Math.random();
 
-            if (prob > random) {
+            if (prob >= random) {
                 result += 1;
             }
 
