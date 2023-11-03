@@ -186,8 +186,8 @@ public class AI extends Thread {
         Character zelda = (Character) zeldaCola.desencolar();
         Character SF = (Character) SFCola.desencolar();
         
-        zeldaCola.encolar(zelda);
-        SFCola.encolar(SF);
+        this.zeldaColaArr[0].encolar(zelda);
+        this.sfColaArr[0].encolar(SF);
         
     }
 

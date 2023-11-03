@@ -83,6 +83,7 @@ public class Admin extends Thread {
             System.out.println("----------------ENTRA SISTEMA OPERATIVO---------------");
             System.out.println("");
             
+            organizeQueues();
             
             if (this.cycleCounter < 2) {
 
@@ -90,15 +91,9 @@ public class Admin extends Thread {
                 System.out.println("");
                 System.out.println("revisa estado sistema");
                 
-                updateCounter(this.zeldaColaArr);
-                updateCounter(this.sfColaArr);
-
-                System.out.println("");
-                System.out.println("COLA 2 ZELDA");
-                this.cola2Zelda.mostrarCola();
-                System.out.println("");
-                System.out.println("COLA 3 ZELDA");
-                this.cola3Zelda.mostrarCola();
+//                System.out.println("");
+//                System.out.println("COLA 3 ZELDA");
+//                this.cola3Zelda.mostrarCola();
                 
                 this.cycleCounter++;
 
@@ -121,7 +116,7 @@ public class Admin extends Thread {
             }
             mutex.release();
         } catch (InterruptedException ex) {
-            Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace(System.out);
         }
         
     }
@@ -301,13 +296,13 @@ public class Admin extends Thread {
         return num;
     }
     
+    //sumarle 1 al contador de los personajes de prioridad 2 y 3
     public void updateCounter(Cola[] colaArr){
         for (int i = 1; i < colaArr.length; i++) {
             Cola cola = colaArr[i];
             Nodo temp = cola.getFront();
 
             while (temp != null) {
-                System.out.println(temp.getData());
 
                 Character chara = (Character) temp.getData();
                 chara.sumCounter();
@@ -316,6 +311,66 @@ public class Admin extends Thread {
             }
         }
         
+    }
+    
+    //ver el valor del contador y asignarlo al siguiente nivel de prioridad
+    public void checkCounter(Cola[] colaArr){
+        for (int i = 1; i < colaArr.length; i++) {
+            Cola cola = colaArr[i];
+            Nodo temp = cola.getFront();
+            Nodo aux;
+
+            while (temp != null) {
+               
+                Character chara = (Character) temp.getData();
+                
+                //si el contador llega a su max, se encola en la cola superior
+                if(chara.getCounter() == 8){
+                    
+                    temp = temp.getPnext();
+                    //desencolar nodo
+                    cola.desencolar();
+                
+                    if(chara.getPrioridad() == 2){
+                        chara.setCounter(0);
+                        chara.setPrioridad(1);
+                        colaArr[0].encolar(chara);
+                    }else if(chara.getPrioridad() == 3){
+                        chara.setCounter(0);
+                        chara.setPrioridad(2);
+                        colaArr[1].encolar(chara);
+                        
+                    }
+                }else{
+                    break;
+                }
+
+            }
+        }
+        
+    }
+    
+    public void organizeQueues(){
+        
+        checkCounter(this.zeldaColaArr);
+        checkCounter(this.sfColaArr);
+        
+//        System.out.println("Despues checkCounter");
+//        System.out.println("");
+//        System.out.println("COLA 1 ZELDA");
+//        this.cola1Zelda.mostrarCola();
+//        
+//        System.out.println("");
+//        System.out.println("COLA 2 ZELDA");
+//        this.cola2Zelda.mostrarCola();
+//        
+//        System.out.println("");
+//        System.out.println("COLA 3 ZELDA");
+//        this.cola3Zelda.mostrarCola();
+
+        updateCounter(this.zeldaColaArr);
+        updateCounter(this.sfColaArr);
+                
     }
             
 }
