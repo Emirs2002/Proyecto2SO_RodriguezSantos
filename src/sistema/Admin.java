@@ -44,7 +44,7 @@ public class Admin extends Thread {
     private int result;
     private Lista winners;
 
-    public Admin(Semaphore mutex, Cola[] zeldaColaArr, Cola[] sfColaArr, Cola colaRefuerzoZelda, Cola colaRefuerzoSF, Personaje sfFighter, Personaje zFighter, Personaje winner, int result, Lista winners) {
+    public Admin(Semaphore mutex, Cola[] zeldaColaArr, Cola[] sfColaArr, Cola colaRefuerzoZelda, Cola colaRefuerzoSF, Lista winners) {
         this.cola1Zelda = zeldaColaArr[0];
         this.cola2Zelda = zeldaColaArr[1];
         this.cola3Zelda = zeldaColaArr[2];
@@ -61,10 +61,6 @@ public class Admin extends Thread {
         this.chooser = new Chooser();
         this.cycleCounter = 0;
 
-        this.zFighter = zFighter;
-        this.sfFighter = sfFighter;
-        this.winner = winner;
-        this.result = result;
         this.winners = winners;
     }
 
@@ -79,10 +75,9 @@ public class Admin extends Thread {
         }
         
         while (true) {
-            checkCycle();
-
             try {
-                sleep(2000);
+                checkCycle();
+                sleep(0);
             } catch (InterruptedException ex) {
                 ex.printStackTrace(System.out);
             }
@@ -90,20 +85,16 @@ public class Admin extends Thread {
     }
 
     public void checkCycle() {
-
         try {
-            mutex.acquire();
+            
+            mutex.acquire(1);
             System.out.println("");
             System.out.println("----------------ENTRA SISTEMA OPERATIVO---------------");
             System.out.println("");
-
+            
             organizeQueues();
 
             if (this.cycleCounter < 2) {
-
-                //revisar el estado del sistema
-                System.out.println("");
-                System.out.println("revisa estado sistema");
 
                 this.cycleCounter++;
 
@@ -124,11 +115,14 @@ public class Admin extends Thread {
 
                 this.cycleCounter = 0;
             }
+            
+            
             mutex.release();
+            sleep(1000);
         } catch (InterruptedException ex) {
-            ex.printStackTrace(System.out);
+            Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
     }
 
     public void createCharacters() {
@@ -308,11 +302,25 @@ public class Admin extends Thread {
 
     public void organizeQueues() {
         
-
+        
+        //Gestionar resultados
+        dealWithResults();
+        
+        //Gestionar el contador de los procesos
         checkCounter(this.zeldaColaArr);
         checkCounter(this.sfColaArr);
 
-        System.out.println("Despues checkCounter");
+        updateCounter(this.zeldaColaArr);
+        updateCounter(this.sfColaArr);
+        
+        System.out.println("");
+        System.out.println("Antes");
+        System.out.println("COLA Refuerzo ZELDA");
+        this.colaRefuerzoZelda.mostrarCola();
+        
+        //Gestionar la cola de refuerzo
+        checkBackUpQueue();
+        
         System.out.println("");
         System.out.println("COLA 1 ZELDA");
         this.cola1Zelda.mostrarCola();
@@ -324,20 +332,20 @@ public class Admin extends Thread {
         System.out.println("");
         System.out.println("COLA 3 ZELDA");
         this.cola3Zelda.mostrarCola();
-
-        updateCounter(this.zeldaColaArr);
-        updateCounter(this.sfColaArr);
-
-        //Gestionar la cola de refuerzo
-        checkBackUpQueue();
         
+        System.out.println("");
+        System.out.println("despues");
+        System.out.println("COLA Refuerzo ZELDA");
+        this.colaRefuerzoZelda.mostrarCola();
+        
+        
+        //Escoger a los combatientes
         pickFighters();
+        System.out.println("");
         System.out.println("Pick fighters");
-        System.out.println("Zelda" + zFighter);
-        System.out.println("SF" +sfFighter);
+        System.out.println("Zelda" + Global.getzFighter());
+        System.out.println("SF" + Global.getSfFighter());
         
-        //Gestionar resultados
-        dealWithResults();
         
     }
 
@@ -397,35 +405,36 @@ public class Admin extends Thread {
 
     public void checkBackUpQueue() {
         //tirar dados para ver si un personaje sale de las colas
-        int resultz = chooser.dice(1, 0.4);
 
-        int resultsf = chooser.dice(1, 0.4);
+        if (!this.colaRefuerzoZelda.esVacio()) {
+            
+            int resultz = chooser.dice(1, 0.4);
+            
+            if (resultz == 1) {
+                System.out.println("SALE DE REFUERZO ZELDA");
 
-        if (resultz == 1) {
-            System.out.println("SALE DE REFUERZO ZELDA");
-
-            if (!this.colaRefuerzoZelda.esVacio()) {
                 Personaje zelda = (Personaje) this.colaRefuerzoZelda.desencolar();
                 System.out.println("zelda refuerzo = " + zelda);
                 this.cola1Zelda.encolar(zelda);
-            }
 
-        } else {
-            System.out.println("no sale psj zelda");
+            } else {
+                System.out.println("no sale psj zelda");
+            }
         }
 
-        if (resultsf == 1) {
-            System.out.println("SALE DE REFUERZO SF");
-
-            if (!this.colaRefuerzoSF.esVacio()) {
+        
+        if (!this.colaRefuerzoSF.esVacio()) {
+            
+            int resultsf = chooser.dice(1, 0.4);
+            
+            if (resultsf == 1) {
+                System.out.println("SALE DE REFUERZO SF");
                 Personaje sf = (Personaje) this.colaRefuerzoSF.desencolar();
                 System.out.println("sf refuerzo = " + sf);
                 this.cola1SF.encolar(sf);
-
+            } else {
+                System.out.println("no sale psj sf");
             }
-
-        } else {
-            System.out.println("no sale psj sf");
         }
     }
 
@@ -434,7 +443,7 @@ public class Admin extends Thread {
         for (int i = 0; i < zeldaColaArr.length; i++) {
             boolean isEmpty = zeldaColaArr[i].esVacio();
             if (!isEmpty) {
-                zFighter = (Personaje) zeldaColaArr[i].desencolar();
+                Global.setzFighter((Personaje) zeldaColaArr[i].desencolar());
                 break;
             }
         }
@@ -442,25 +451,35 @@ public class Admin extends Thread {
         for (int i = 0; i < sfColaArr.length; i++) {
             boolean isEmpty = sfColaArr[i].esVacio();
             if (!isEmpty) {
-                sfFighter = (Personaje) sfColaArr[i].desencolar();
+                Global.setSfFighter((Personaje) sfColaArr[i].desencolar());
                 break;
             }
         }
     }
     
     public void dealWithResults(){
-        if(result!= 0)
+        if(Global.getResult() != 0)
         {
-            if(result == 1){
-                Nodo nodito = new Nodo(winner);
-                winners.addAtEnd(nodito);
-                winners.imprimirLista();
-            }else if(result == 2){
-                cola1Zelda.encolar(zFighter);
-                cola1SF.encolar(sfFighter);
-            }else if(result == 3){
-                colaRefuerzoZelda.encolar(zFighter);
-                colaRefuerzoSF.encolar(sfFighter);
+            switch (Global.getResult()) {
+                case 1:
+                    Nodo nodito = new Nodo(Global.getWinner());
+                    winners.addAtEnd(nodito);
+                    winners.imprimirLista();
+                    Global.setResult(0);
+                    break;
+                case 2:
+                    cola1Zelda.encolar(Global.getzFighter());
+                    cola1SF.encolar(Global.getSfFighter());
+                    Global.setResult(0);
+                    break;
+                case 3:
+                    colaRefuerzoZelda.encolar(Global.getzFighter());
+                    colaRefuerzoSF.encolar(Global.getSfFighter());
+                    Global.setResult(0);
+                    break;
+                default:
+                    System.out.println("resultado no valido");
+                    break;
             }
         }
     }

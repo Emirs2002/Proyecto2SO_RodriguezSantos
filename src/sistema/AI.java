@@ -23,17 +23,12 @@ public class AI extends Thread {
     private int SFVictories;
     private double[] probs = {0.40, 0.27, 0.33}; //prob de ganar, prob empate, prob no combate
     private Semaphore mutex;
-    private Personaje sfFighter;
-    private Personaje zFighter;
-    private Personaje winner;
-    public int result; //hay ganador 1, empate 2, no hubo combate 3
+//    private Personaje sfFighter;
+//    private Personaje zFighter;
+//    private Personaje winner;
 
-    public AI(Semaphore mutex, Personaje sfFighter, Personaje zFighter, Personaje winner, int result) {
+    public AI(Semaphore mutex) {
         this.mutex = mutex;
-        this.zFighter = zFighter;
-        this.sfFighter = sfFighter;
-        this.winner = winner;
-        this.result = result;
     }
 
     @Override
@@ -42,24 +37,26 @@ public class AI extends Thread {
         while (true) {
             //COMBATIR
             try {
-                mutex.acquire();
+                mutex.acquire(1);
                 System.out.println("");
                 System.out.println("----------------ENTRA PROCESADOR---------------");
                 System.out.println("");
 
                 System.out.println("EN COMBATE: ");
-                if(zFighter != null  && sfFighter != null)
+                if(Global.getzFighter() != null  && Global.getSfFighter() != null)
                 {
-                double dice = deciding();
-                combat(dice);
+                    double dice = deciding();
+                    combat(dice);
+                }else{
+                    System.out.println("No hay luchadores suficientes");
                 }
+                
                 System.out.println("Resultados: ");
-                System.out.println("Zelda: " + zFighter);
-                System.out.println("SF: " + sfFighter);
-                System.out.println("Ganador: " + winner);
+                System.out.println("Zelda: " + Global.getzFighter());
+                System.out.println("SF: " + Global.getSfFighter());
+                System.out.println("Ganador: " + Global.getWinner());
                 mutex.release();
-
-                sleep(2000);
+                sleep(1000);
             } catch (InterruptedException ex) {
                 ex.printStackTrace(System.out);
             }
@@ -90,15 +87,15 @@ public class AI extends Thread {
         if (dice <= 0.67) {
             dice = Math.random();
             if (dice >= 0.49) {
-                this.result = 1; //hubo un ganador
+                Global.setResult(1); //hubo un ganador
                 System.out.println("HAY GANADOR");
                 winner();
             } else {
-                this.result = 2; //hubo un empate  
+                Global.setResult(2); //hubo un empate 
                 System.out.println("EMPATE");
             }
         } else {
-            this.result = 3;//no hubo combate
+            Global.setResult(3); //no hubo combate
             System.out.println("NO HUBO COMBATE");
         }
         System.out.println("FINALIZO EL COMBATE");
@@ -108,8 +105,9 @@ public class AI extends Thread {
     //Esta funcion determina el ganador de un combate
     public void winner() {
 
-        Personaje zelda = zFighter;
-        Personaje SF = sfFighter;
+        Personaje zelda = Global.getzFighter();
+        Personaje SF = Global.getSfFighter();
+        
         int Zpoints = 0;
         int SFpoints = 0;
         double random = Math.random();
@@ -141,23 +139,23 @@ public class AI extends Thread {
         if (Zpoints > SFpoints) {
             System.out.println("");
             System.out.println("ganador zelda: " + zelda);
-            winner = zFighter;
+            Global.setWinner(zelda);
             
         } else if (SFpoints > Zpoints) {
             System.out.println("");
             System.out.println("ganador sf: " + SF);
-            winner = sfFighter;
+            Global.setWinner(SF);
 
         } else if (SFpoints == Zpoints) {
             if (random <= 0.50) {
                 System.out.println("");
                 System.out.println("ganador zelda: " + zelda);
-                winner = zFighter;
+                Global.setWinner(zelda);
                 
             } else {
                 System.out.println("");
                 System.out.println("ganador sf: " + SF);
-                winner = sfFighter;
+                Global.setWinner(SF);
             }
         }
 

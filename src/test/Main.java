@@ -33,15 +33,11 @@ public class Main {
         Cola[] sfArrCola = {SF1, SF2, SF3};
 
         Lista winners = new Lista();
-        Personaje sfFighter = null;
-        Personaje zFighter = null;
-        Personaje winner = null;
-        int result = 0; // ganador 1, empate 2, no combate 3
-
+        
         Semaphore mutex = new Semaphore(1);
 
-        Admin so = new Admin(mutex, zeldaArrCola, sfArrCola, zeldaRefuerzo, SFRefuerzo, sfFighter, zFighter, winner, result, winners);
-        AI procesador = new AI(mutex, sfFighter, zFighter, winner, result);
+        Admin so = new Admin(mutex, zeldaArrCola, sfArrCola, zeldaRefuerzo, SFRefuerzo, winners);
+        AI procesador = new AI(mutex);
 
         so.start();
         procesador.start();
