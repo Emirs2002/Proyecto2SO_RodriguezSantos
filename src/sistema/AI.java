@@ -7,7 +7,8 @@ package sistema;
 import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import sistema.Character;
+import sistema.*;
+import test.Main;
 import utilidades.*;
 
 /**
@@ -20,22 +21,19 @@ public class AI extends Thread {
     private float time = 10; //tiempo que toma
     private int ZVicories;
     private int SFVictories;
-    public int results; //hay ganador 1, empate 2, no hubo combate 3
     private double[] probs = {0.40, 0.27, 0.33}; //prob de ganar, prob empate, prob no combate
     private Semaphore mutex;
-    private Cola[] zeldaColaArr;
-    private Cola[] sfColaArr;
-    private Lista winners;
-    private Cola zRefuerzo;
-    private Cola sfRefuerzo;
+    private Personaje sfFighter;
+    private Personaje zFighter;
+    private Personaje winner;
+    public int result; //hay ganador 1, empate 2, no hubo combate 3
 
-    public AI(Semaphore mutex, Cola[] zeldaColaArr, Cola[] sfColaArr, Cola zRefuerzo, Cola sfRefuerzo, Lista winners) {
+    public AI(Semaphore mutex, Personaje sfFighter, Personaje zFighter, Personaje winner, int result) {
         this.mutex = mutex;
-        this.sfColaArr = sfColaArr;
-        this.zeldaColaArr = zeldaColaArr;
-        this.winners = winners;
-        this.zRefuerzo = zRefuerzo;
-        this.sfRefuerzo = sfRefuerzo;
+        this.zFighter = zFighter;
+        this.sfFighter = sfFighter;
+        this.winner = winner;
+        this.result = result;
     }
 
     @Override
@@ -49,18 +47,16 @@ public class AI extends Thread {
                 System.out.println("----------------ENTRA PROCESADOR---------------");
                 System.out.println("");
 
-                Cola zeldaCola = checkQueue(zeldaColaArr);
-                Cola sfCola = checkQueue(sfColaArr);
-
-                if (zeldaCola != null && sfCola != null) {
-
-                    System.out.println("EN COMBATE: ");
-                    double dice = deciding();
-                    combat(zeldaCola, sfCola, dice);
-                } else {
-                    System.out.println("No hay suficientes luchadores creados");
+                System.out.println("EN COMBATE: ");
+                if(zFighter != null  && sfFighter != null)
+                {
+                double dice = deciding();
+                combat(dice);
                 }
-
+                System.out.println("Resultados: ");
+                System.out.println("Zelda: " + zFighter);
+                System.out.println("SF: " + sfFighter);
+                System.out.println("Ganador: " + winner);
                 mutex.release();
 
                 sleep(2000);
@@ -70,20 +66,6 @@ public class AI extends Thread {
         }
     }
 
-    //chequear todas las colas hasta que haya una no vacia
-    public Cola checkQueue(Cola[] colaArr) {
-        Cola cola = null;
-
-        for (int i = 0; i < colaArr.length; i++) {
-            boolean isEmpty = colaArr[i].esVacio();
-            if (!isEmpty) {
-                cola = colaArr[i];
-                break;
-            }
-        }
-
-        return cola;
-    }
 
     public double deciding() {
 
@@ -103,40 +85,31 @@ public class AI extends Thread {
     }
 
     //Esta funcion determina el resultado del combate
-    public void combat(Cola zelda, Cola SF, double dice) {
+    public void combat(double dice) {
 
         if (dice <= 0.67) {
             dice = Math.random();
             if (dice >= 0.49) {
-                this.results = 1; //hubo un ganador
+                this.result = 1; //hubo un ganador
                 System.out.println("HAY GANADOR");
-                winner(zelda, SF);
+                winner();
             } else {
-                this.results = 3; //hubo un empate  
+                this.result = 2; //hubo un empate  
                 System.out.println("EMPATE");
-                tie(zelda, SF);
             }
         } else {
-            this.results = 2;//no hubo combate
+            this.result = 3;//no hubo combate
             System.out.println("NO HUBO COMBATE");
-            noCombat(zelda, SF);
         }
         System.out.println("FINALIZO EL COMBATE");
-
-        System.out.println("cola zelda:");
-        System.out.println("");
-        zelda.mostrarCola();
-        System.out.println("cola sf:");
-        System.out.println("");
-        SF.mostrarCola();
 
     }
 
     //Esta funcion determina el ganador de un combate
-    public void winner(Cola zeldaCola, Cola SFCola) {
+    public void winner() {
 
-        Character zelda = (Character) zeldaCola.desencolar();
-        Character SF = (Character) SFCola.desencolar();
+        Personaje zelda = zFighter;
+        Personaje SF = sfFighter;
         int Zpoints = 0;
         int SFpoints = 0;
         double random = Math.random();
@@ -168,47 +141,26 @@ public class AI extends Thread {
         if (Zpoints > SFpoints) {
             System.out.println("");
             System.out.println("ganador zelda: " + zelda);
-            winners.addAtEnd(new Nodo(zelda));
-
-            Character loser = SF;
+            winner = zFighter;
+            
         } else if (SFpoints > Zpoints) {
             System.out.println("");
             System.out.println("ganador sf: " + SF);
-            winners.addAtEnd(new Nodo(SF));
+            winner = sfFighter;
 
-            Character loser = zelda;
         } else if (SFpoints == Zpoints) {
             if (random <= 0.50) {
                 System.out.println("");
                 System.out.println("ganador zelda: " + zelda);
-                winners.addAtEnd(new Nodo(zelda));
-                Character loser = SF;
+                winner = zFighter;
+                
             } else {
                 System.out.println("");
                 System.out.println("ganador sf: " + SF);
-                winners.addAtEnd(new Nodo(SF));
-                Character loser = zelda;
+                winner = sfFighter;
             }
         }
 
     }
 
-    public void tie(Cola zeldaCola, Cola SFCola) {
-        Character zelda = (Character) zeldaCola.desencolar();
-        Character SF = (Character) SFCola.desencolar();
-
-        this.zeldaColaArr[0].encolar(zelda);
-        this.sfColaArr[0].encolar(SF);
-        
-
-    }
-
-    public void noCombat(Cola zeldaCola, Cola SFCola) {
-        Character zelda = (Character) zeldaCola.desencolar();
-        Character SF = (Character) SFCola.desencolar();
-
-        this.zRefuerzo.encolar(zelda);
-        this.sfRefuerzo.encolar(SF);
-
-    }
 }

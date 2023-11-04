@@ -6,11 +6,11 @@ import javax.swing.ImageIcon;
  *
  * @author emirs
  */
-public class Character {
-    private final String id;
+public class Personaje {
+    private String id;
     private int prioridad; //1,2,3
     private int counter;//max 8
-    private final String name;
+    private  String name;
     private String game;
     public ImageIcon imagen;
     private int abilities; //60%
@@ -20,7 +20,13 @@ public class Character {
     private static int zeldaCounter;
     private static int SFCounter;
 
-    public Character(int prioridad,String name, ImageIcon imagen, int abilities, int lifePoints, int strenght, int agility, String game) {
+
+    public Personaje() {
+    }
+
+
+    
+    public Personaje(int prioridad,String name, ImageIcon imagen, int abilities, int lifePoints, int strenght, int agility, String game) {
         this.id = (game.equals("z")) ? "z" + ++zeldaCounter : "sf"+ ++SFCounter;
         this.name = name;
         this.prioridad = prioridad;
@@ -29,7 +35,9 @@ public class Character {
         this.lifePoints = lifePoints;
         this.strenght = strenght;
         this.agility = agility;
+
     }
+    
 
     @Override
     public String toString() {
