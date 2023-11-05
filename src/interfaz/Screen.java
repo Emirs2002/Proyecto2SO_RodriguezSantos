@@ -7,10 +7,12 @@ package interfaz;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
+import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -34,7 +36,6 @@ public class Screen extends javax.swing.JFrame {
         } catch (IOException ex) {
             ex.printStackTrace(System.out);
         }
-        
         
     }
 
@@ -309,7 +310,7 @@ public class Screen extends javax.swing.JFrame {
         chosenCharaImageZ.setForeground(new java.awt.Color(0, 0, 0));
         chosenCharaImageZ.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         chosenCharaImageZ.setText("IMAGEN");
-        jPanel1.add(chosenCharaImageZ, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 460, 120, 130));
+        jPanel1.add(chosenCharaImageZ, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 430, 140, 180));
 
         chosenCharaImageSF.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         chosenCharaImageSF.setForeground(new java.awt.Color(255, 255, 255));
