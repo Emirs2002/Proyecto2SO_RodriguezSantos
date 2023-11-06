@@ -10,33 +10,132 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import sistema.AI;
+import sistema.Admin;
+import utilidades.Cola;
+import utilidades.Lista;
 
 /**
  *
  * @author emirs
  */
 public class Screen extends javax.swing.JFrame {
-
+    
+    public Lista winners = new Lista();
     /**
      * Creates new form Pantalla
      */
     public Screen() {
         initComponents();
-        Font zeldaFont = null;
-        try {
+        setZeldaFont(); 
+        setSfFonts();
+        
+        //colas zelda
+        Cola zelda1 = new Cola();
+        Cola zelda2 = new Cola();
+        Cola zelda3 = new Cola();
+        Cola zeldaRefuerzo = new Cola();
+        Cola[] zeldaArrCola = {zelda1, zelda2, zelda3};
+
+        //colas SF
+        Cola SF1 = new Cola();
+        Cola SF2 = new Cola();
+        Cola SF3 = new Cola();
+        Cola SFRefuerzo = new Cola();
+        Cola[] sfArrCola = {SF1, SF2, SF3};
+
+        Semaphore mutex = new Semaphore(1);
+
+        Admin so = new Admin(mutex, zeldaArrCola, sfArrCola, zeldaRefuerzo, SFRefuerzo, this.winners);
+        AI procesador = new AI(mutex);
+
+        so.start();
+        procesador.start();
+    }
+    
+    public void setZeldaFont(){
+         Font zeldaFont = null;
+         
+         try {
+            
             zeldaFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getClassLoader().getResourceAsStream("fonts/The Wild Breath of Zelda.otf"));
             
-            Font zeldaFontTitle = zeldaFont.deriveFont(Font.BOLD,20);
-            zeldaTitle.setFont(zeldaFontTitle); 
+            Font zeldaMainTitleFont = zeldaFont.deriveFont(Font.PLAIN,36);
+            Font zeldaTitleFont = zeldaFont.deriveFont(Font.PLAIN,21);
+            Font zeldaQueueFont = zeldaFont.deriveFont(Font.PLAIN,18);
+            Font zeldaStatsFont = zeldaFont.deriveFont(Font.PLAIN,14);
+            
+            //titulos
+            mainTitleZelda.setFont(zeldaMainTitleFont);
+            zeldaTitle.setFont(zeldaTitleFont); 
+            
+            //colas
+            zPriority1Label.setFont(zeldaQueueFont);
+            zPriority2Label.setFont(zeldaQueueFont);
+            zPriority3Label.setFont(zeldaQueueFont);
+            zBackupLabel.setFont(zeldaQueueFont);
+            
+            //stats psj elegido
+            zeldaIdLabel.setFont(zeldaStatsFont);
+            zeldaNameLabel.setFont(zeldaStatsFont);
+            zeldaStrenghtLabel.setFont(zeldaStatsFont);
+            zeldaPriorityLabel.setFont(zeldaStatsFont);
+            zeldaAbilityLabel.setFont(zeldaStatsFont);
+            zeldaLifeLabel.setFont(zeldaStatsFont);
+            zeldaAgilityLabel.setFont(zeldaStatsFont);
+            
+            victoriesZLabel.setFont(zeldaStatsFont);
+            
         } catch (FontFormatException ex) {
             ex.printStackTrace(System.out);
         } catch (IOException ex) {
             ex.printStackTrace(System.out);
         }
-        
+    }
+    
+    public void setSfFonts(){
+        Font sfFont = null;
+         
+         try {
+            
+            sfFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getClassLoader().getResourceAsStream("fonts/BrutalFontPro.otf"));
+            
+            Font sfMainTitleFont = sfFont.deriveFont(Font.BOLD,32);
+            Font sfTitleFont = sfFont.deriveFont(Font.BOLD,20);
+            Font sfQueueFont = sfFont.deriveFont(Font.PLAIN,18);
+            Font sfStatsFont = sfFont.deriveFont(Font.PLAIN,14);
+            
+            //titulos
+            mainTitleSf.setFont(sfMainTitleFont);
+            sfTitle.setFont(sfTitleFont); 
+            
+            //colas
+            sfPriority1Label.setFont(sfQueueFont);
+            sfPriority2Label.setFont(sfQueueFont);
+            sfPriority3Label.setFont(sfQueueFont);
+            sfBackupLabel.setFont(sfQueueFont);
+            
+            //stats psj elegido
+            sfIdLabel.setFont(sfStatsFont);
+            sfNameLabel.setFont(sfStatsFont);
+            sfStrenghtLabel.setFont(sfStatsFont);
+            sfPriorityLabel.setFont(sfStatsFont);
+            sfAbilityLabel.setFont(sfStatsFont);
+            sfLifeLabel.setFont(sfStatsFont);
+            sfAgilityLabel.setFont(sfStatsFont);
+            
+            victoriesSfLabel.setFont(sfStatsFont);
+            
+        } catch (FontFormatException ex) {
+            ex.printStackTrace(System.out);
+        } catch (IOException ex) {
+            ex.printStackTrace(System.out);
+        }
     }
 
     /**
@@ -150,7 +249,7 @@ public class Screen extends javax.swing.JFrame {
         jPanel1.add(jScrollPane11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 250, 50));
 
         priority1Z.setColumns(20);
-        priority1Z.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        priority1Z.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         priority1Z.setRows(5);
         priority1Z.setFocusable(false);
         jScrollPane12.setViewportView(priority1Z);
@@ -201,6 +300,15 @@ public class Screen extends javax.swing.JFrame {
         zBackupLabel.setFont(new java.awt.Font("The Wild Breath of Zelda", 0, 18)); // NOI18N
         zBackupLabel.setForeground(new java.awt.Color(0, 0, 0));
         zBackupLabel.setText("Refuerzo");
+        zBackupLabel.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                zBackupLabelAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         jPanel1.add(zBackupLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, -1));
 
         victoriesSfLabel.setFont(new java.awt.Font("Brutal Font Pro", 0, 14)); // NOI18N
@@ -208,10 +316,10 @@ public class Screen extends javax.swing.JFrame {
         victoriesSfLabel.setText("VICTORIAS SF6");
         jPanel1.add(victoriesSfLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 450, -1, -1));
 
-        sfTitle.setFont(new java.awt.Font("Brutal Font Pro", 1, 18)); // NOI18N
+        sfTitle.setFont(new java.awt.Font("Broadway", 1, 18)); // NOI18N
         sfTitle.setForeground(new java.awt.Color(241, 182, 185));
         sfTitle.setText("STREET FIGHTER 6");
-        jPanel1.add(sfTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 40, -1, -1));
+        jPanel1.add(sfTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 40, -1, -1));
 
         mainTitleSf.setFont(new java.awt.Font("Brutal Font Pro", 1, 32)); // NOI18N
         mainTitleSf.setForeground(new java.awt.Color(255, 255, 255));
@@ -231,7 +339,7 @@ public class Screen extends javax.swing.JFrame {
         });
         jPanel1.add(showWinners, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 470, 150, 50));
 
-        zPriority1Label.setFont(new java.awt.Font("The Wild Breath of Zelda", 0, 18)); // NOI18N
+        zPriority1Label.setFont(new java.awt.Font("Tempus Sans ITC", 0, 18)); // NOI18N
         zPriority1Label.setForeground(new java.awt.Color(0, 0, 0));
         zPriority1Label.setText("Prioridad 1");
         jPanel1.add(zPriority1Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
@@ -457,6 +565,10 @@ public class Screen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void showWinnersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showWinnersActionPerformed
+       
+        (this.winners).imprimirLista();
+        
+
     }//GEN-LAST:event_showWinnersActionPerformed
 
     private void exitBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBActionPerformed
@@ -466,6 +578,10 @@ public class Screen extends javax.swing.JFrame {
     private void VictoriesSFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VictoriesSFActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_VictoriesSFActionPerformed
+
+    private void zBackupLabelAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_zBackupLabelAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_zBackupLabelAncestorAdded
 
     /**
      * @param args the command line arguments

@@ -2,6 +2,7 @@ package utilidades;
 
 
 import javax.swing.JOptionPane;
+import sistema.Personaje;
 
 /**
  *
@@ -107,13 +108,12 @@ public class Lista {
 
             for (int i = 0; i< this.getTamanho(); i++ ){               
 
-                print += temp.getData();
+                print += ((Personaje) temp.getData()).getId() + " " + ((Personaje) temp.getData()).getName() + "\n";
                 
                 temp = proximoNodo(temp);               
                 
                }
-            System.out.println(print);
-   
+            JOptionPane.showMessageDialog(null, print);
             }
         }
     

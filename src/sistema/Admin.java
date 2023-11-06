@@ -465,7 +465,8 @@ public class Admin extends Thread {
                 case 1:
                     Nodo nodito = new Nodo(Global.getWinner());
                     winners.addAtEnd(nodito);
-                    winners.imprimirLista();
+//                    winners.imprimirLista();
+                    Global.setWinner(null);
                     Global.setResult(0);
                     break;
                 case 2:
