@@ -1,5 +1,6 @@
 package sistema;
 
+import interfaz.GUIHandler;
 import java.awt.Image;
 import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
@@ -44,8 +45,10 @@ public class Admin extends Thread {
     private Personaje winner;
     private int result;
     private Lista winners;
+    
+    public GUIHandler guiHandler;
 
-    public Admin(Semaphore mutex, Cola[] zeldaColaArr, Cola[] sfColaArr, Cola colaRefuerzoZelda, Cola colaRefuerzoSF, Lista winners) {
+    public Admin(Semaphore mutex, Cola[] zeldaColaArr, Cola[] sfColaArr, Cola colaRefuerzoZelda, Cola colaRefuerzoSF, Lista winners, GUIHandler gui) {
         this.cola1Zelda = zeldaColaArr[0];
         this.cola2Zelda = zeldaColaArr[1];
         this.cola3Zelda = zeldaColaArr[2];
@@ -63,6 +66,7 @@ public class Admin extends Thread {
         this.cycleCounter = 0;
 
         this.winners = winners;
+        this.guiHandler = gui;
     }
 
     @Override
@@ -74,6 +78,9 @@ public class Admin extends Thread {
             createCharacters();
             count++;
         }
+        
+        this.guiHandler.formatQueues(this.zeldaColaArr, "z");
+        this.guiHandler.formatQueues(this.sfColaArr, "sf");
         
         while (true) {
             try {
@@ -108,6 +115,8 @@ public class Admin extends Thread {
                 if (create == 1) {
 
                     createCharacters();
+                    this.guiHandler.formatQueues(this.zeldaColaArr, "z");
+                    this.guiHandler.formatQueues(this.sfColaArr, "sf");
 
                 } else {
                     System.out.println("");
@@ -310,38 +319,21 @@ public class Admin extends Thread {
         //Gestionar el contador de los procesos
         checkCounter(this.zeldaColaArr);
         checkCounter(this.sfColaArr);
-
+        
         updateCounter(this.zeldaColaArr);
         updateCounter(this.sfColaArr);
         
-        System.out.println("");
-        System.out.println("Antes");
-        System.out.println("COLA Refuerzo ZELDA");
-        this.colaRefuerzoZelda.mostrarCola();
+        this.guiHandler.formatQueues(this.zeldaColaArr, "z");
+        this.guiHandler.formatQueues(this.sfColaArr, "sf");
         
         //Gestionar la cola de refuerzo
         checkBackUpQueue();
         
-        System.out.println("");
-        System.out.println("COLA 1 ZELDA");
-        this.cola1Zelda.mostrarCola();
-
-        System.out.println("");
-        System.out.println("COLA 2 ZELDA");
-        this.cola2Zelda.mostrarCola();
-
-        System.out.println("");
-        System.out.println("COLA 3 ZELDA");
-        this.cola3Zelda.mostrarCola();
-        
-        System.out.println("");
-        System.out.println("despues");
-        System.out.println("COLA Refuerzo ZELDA");
-        this.colaRefuerzoZelda.mostrarCola();
-        
-        
         //Escoger a los combatientes
         pickFighters();
+        this.guiHandler.formatQueue(cola1Zelda, "z", 0);
+        this.guiHandler.formatQueue(cola1SF, "sf", 0);
+        
         System.out.println("");
         System.out.println("Pick fighters");
         System.out.println("Zelda" + Global.getzFighter());
@@ -372,7 +364,6 @@ public class Admin extends Thread {
         for (int i = 1; i < colaArr.length; i++) {
             Cola cola = colaArr[i];
             Nodo temp = cola.getFront();
-            Nodo aux;
 
             while (temp != null) {
 
@@ -416,7 +407,12 @@ public class Admin extends Thread {
 
                 Personaje zelda = (Personaje) this.colaRefuerzoZelda.desencolar();
                 System.out.println("zelda refuerzo = " + zelda);
+                
+                this.guiHandler.formatQueue(this.colaRefuerzoZelda, "z", 3);
+                        
                 this.cola1Zelda.encolar(zelda);
+                
+                this.guiHandler.formatQueue(this.cola1Zelda, "z", 0);
 
             } else {
                 System.out.println("no sale psj zelda");
@@ -432,7 +428,11 @@ public class Admin extends Thread {
                 System.out.println("SALE DE REFUERZO SF");
                 Personaje sf = (Personaje) this.colaRefuerzoSF.desencolar();
                 System.out.println("sf refuerzo = " + sf);
+                
+                this.guiHandler.formatQueue(this.colaRefuerzoSF, "sf", 3);
                 this.cola1SF.encolar(sf);
+                this.guiHandler.formatQueue(this.cola1SF, "sf", 0);
+                
             } else {
                 System.out.println("no sale psj sf");
             }
@@ -465,18 +465,24 @@ public class Admin extends Thread {
                 case 1:
                     Nodo nodito = new Nodo(Global.getWinner());
                     winners.addAtEnd(nodito);
-//                    winners.imprimirLista();
                     Global.setWinner(null);
                     Global.setResult(0);
                     break;
                 case 2:
                     cola1Zelda.encolar(Global.getzFighter());
+                    this.guiHandler.formatQueue(this.cola1Zelda, "z", 0);
+                    
                     cola1SF.encolar(Global.getSfFighter());
+                    this.guiHandler.formatQueue(this.cola1SF, "sf", 0);
+                    
                     Global.setResult(0);
                     break;
                 case 3:
                     colaRefuerzoZelda.encolar(Global.getzFighter());
+                    this.guiHandler.formatQueue(this.colaRefuerzoZelda, "z", 3);
+                    
                     colaRefuerzoSF.encolar(Global.getSfFighter());
+                    this.guiHandler.formatQueue(this.colaRefuerzoSF, "sf", 3);
                     Global.setResult(0);
                     break;
                 default:

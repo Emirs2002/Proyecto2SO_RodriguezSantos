@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 import sistema.AI;
 import sistema.Admin;
 import utilidades.Cola;
@@ -50,8 +51,13 @@ public class Screen extends javax.swing.JFrame {
         Cola[] sfArrCola = {SF1, SF2, SF3};
 
         Semaphore mutex = new Semaphore(1);
-
-        Admin so = new Admin(mutex, zeldaArrCola, sfArrCola, zeldaRefuerzo, SFRefuerzo, this.winners);
+        
+        JTextArea[] colasZelda = {priority1Z,priority2Z,priority3Z,priorityBackupZ};
+        JTextArea[] colasSF = {priority1SF,priority2SF,priority3SF,priorityBackupSF};
+        
+        //Declaración clases sistema
+        GUIHandler gui = new GUIHandler(colasZelda,colasSF);
+        Admin so = new Admin(mutex, zeldaArrCola, sfArrCola, zeldaRefuerzo, SFRefuerzo, this.winners,gui);
         AI procesador = new AI(mutex);
 
         so.start();
@@ -225,7 +231,7 @@ public class Screen extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         priorityBackupZ.setColumns(20);
-        priorityBackupZ.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        priorityBackupZ.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         priorityBackupZ.setRows(5);
         priorityBackupZ.setFocusable(false);
         jScrollPane9.setViewportView(priorityBackupZ);
@@ -233,7 +239,7 @@ public class Screen extends javax.swing.JFrame {
         jPanel1.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 250, 50));
 
         priority3Z.setColumns(20);
-        priority3Z.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        priority3Z.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         priority3Z.setRows(5);
         priority3Z.setFocusable(false);
         jScrollPane10.setViewportView(priority3Z);
@@ -241,7 +247,7 @@ public class Screen extends javax.swing.JFrame {
         jPanel1.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 250, 50));
 
         priority2Z.setColumns(20);
-        priority2Z.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        priority2Z.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         priority2Z.setRows(5);
         priority2Z.setFocusable(false);
         jScrollPane11.setViewportView(priority2Z);
@@ -368,7 +374,7 @@ public class Screen extends javax.swing.JFrame {
         jPanel1.add(sfPriority1Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 80, -1, -1));
 
         priority1SF.setColumns(20);
-        priority1SF.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        priority1SF.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         priority1SF.setRows(5);
         priority1SF.setFocusable(false);
         jScrollPane13.setViewportView(priority1SF);
@@ -381,7 +387,7 @@ public class Screen extends javax.swing.JFrame {
         jPanel1.add(sfPriority2Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 160, -1, -1));
 
         priority2SF.setColumns(20);
-        priority2SF.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        priority2SF.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         priority2SF.setRows(5);
         priority2SF.setFocusable(false);
         jScrollPane14.setViewportView(priority2SF);
@@ -394,7 +400,7 @@ public class Screen extends javax.swing.JFrame {
         jPanel1.add(sfPriority3Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 240, -1, -1));
 
         priorityBackupSF.setColumns(20);
-        priorityBackupSF.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        priorityBackupSF.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         priorityBackupSF.setRows(5);
         priorityBackupSF.setFocusable(false);
         jScrollPane16.setViewportView(priorityBackupSF);
@@ -402,7 +408,7 @@ public class Screen extends javax.swing.JFrame {
         jPanel1.add(jScrollPane16, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 340, 250, 50));
 
         priority3SF.setColumns(20);
-        priority3SF.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        priority3SF.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         priority3SF.setRows(5);
         priority3SF.setFocusable(false);
         jScrollPane15.setViewportView(priority3SF);
