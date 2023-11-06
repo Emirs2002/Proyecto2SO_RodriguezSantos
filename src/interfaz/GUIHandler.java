@@ -32,8 +32,8 @@ public class GUIHandler {
     private JTextArea colaSfRefuerzo;
     private JTextArea[] colasSf;
     
-//    JTextField sfVictory;
-//    JTextField zeldaVictory;
+    private JTextField sfVictory;
+    private JTextField zeldaVictory;
     
 //    JLabel sfId;
 //    JLabel sfName;
@@ -46,7 +46,7 @@ public class GUIHandler {
 //    JLabel zeldaImage;
 //    JLabel sfImage;
     
-    public GUIHandler(JTextArea[] colasZelda,JTextArea[] colasSf){
+    public GUIHandler(JTextArea[] colasZelda,JTextArea[] colasSf, JTextField zVictory,JTextField sfVictory){
         this.colaZelda1 = colasZelda[0];
         this.colaZelda2 = colasZelda[1];
         this.colaZelda3 = colasZelda[2];
@@ -58,6 +58,9 @@ public class GUIHandler {
         this.colaSf3 = colasSf[2];
         this.colasSf = colasSf;
         this.colaSfRefuerzo = colasSf[3];
+        
+        this.zeldaVictory = zVictory;
+        this.sfVictory = sfVictory;
         
     }
     
@@ -119,5 +122,14 @@ public class GUIHandler {
         }
         
     }
+
+    public JTextField getSfVictory() {
+        return sfVictory;
+    }
+
+    public JTextField getZeldaVictory() {
+        return zeldaVictory;
+    }
+    
     
 }

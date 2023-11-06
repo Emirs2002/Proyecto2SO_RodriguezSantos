@@ -56,7 +56,8 @@ public class Screen extends javax.swing.JFrame {
         JTextArea[] colasSF = {priority1SF,priority2SF,priority3SF,priorityBackupSF};
         
         //Declaración clases sistema
-        GUIHandler gui = new GUIHandler(colasZelda,colasSF);
+        
+        GUIHandler gui = new GUIHandler(colasZelda,colasSF,victoriesZ,victoriesSF);
         Admin so = new Admin(mutex, zeldaArrCola, sfArrCola, zeldaRefuerzo, SFRefuerzo, this.winners,gui);
         AI procesador = new AI(mutex);
 
@@ -169,7 +170,7 @@ public class Screen extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         victoriesZ = new javax.swing.JTextField();
-        VictoriesSF = new javax.swing.JTextField();
+        victoriesSF = new javax.swing.JTextField();
         zBackupLabel = new javax.swing.JLabel();
         victoriesSfLabel = new javax.swing.JLabel();
         sfTitle = new javax.swing.JLabel();
@@ -292,16 +293,16 @@ public class Screen extends javax.swing.JFrame {
         victoriesZ.setFocusable(false);
         jPanel1.add(victoriesZ, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 470, 50, 40));
 
-        VictoriesSF.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        VictoriesSF.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        VictoriesSF.setText("0");
-        VictoriesSF.setFocusable(false);
-        VictoriesSF.addActionListener(new java.awt.event.ActionListener() {
+        victoriesSF.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        victoriesSF.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        victoriesSF.setText("0");
+        victoriesSF.setFocusable(false);
+        victoriesSF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VictoriesSFActionPerformed(evt);
+                victoriesSFActionPerformed(evt);
             }
         });
-        jPanel1.add(VictoriesSF, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 470, 50, 40));
+        jPanel1.add(victoriesSF, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 470, 50, 40));
 
         zBackupLabel.setFont(new java.awt.Font("The Wild Breath of Zelda", 0, 18)); // NOI18N
         zBackupLabel.setForeground(new java.awt.Color(0, 0, 0));
@@ -581,9 +582,9 @@ public class Screen extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_exitBActionPerformed
 
-    private void VictoriesSFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VictoriesSFActionPerformed
+    private void victoriesSFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_victoriesSFActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_VictoriesSFActionPerformed
+    }//GEN-LAST:event_victoriesSFActionPerformed
 
     private void zBackupLabelAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_zBackupLabelAncestorAdded
         // TODO add your handling code here:
@@ -594,7 +595,6 @@ public class Screen extends javax.swing.JFrame {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField VictoriesSF;
     private javax.swing.JSlider adjustSpeed;
     private javax.swing.JLabel chosenCharaImageSF;
     private javax.swing.JLabel chosenCharaImageZ;
@@ -643,6 +643,7 @@ public class Screen extends javax.swing.JFrame {
     private javax.swing.JLabel sfStrenghtLabel;
     private javax.swing.JLabel sfTitle;
     private javax.swing.JButton showWinners;
+    private javax.swing.JTextField victoriesSF;
     private javax.swing.JLabel victoriesSfLabel;
     private javax.swing.JTextField victoriesZ;
     private javax.swing.JLabel victoriesZLabel;

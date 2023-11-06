@@ -16,6 +16,8 @@ public class Global {
     private static Personaje zFighter = null;
     private static Personaje winner = null;
     private static int result = 0; // ganador 1, empate 2, no combate 3
+    private static int victoriesZelda = 0; 
+    private static int victoriesSF = 0; 
     
     /**
      * @return the sfFighter
@@ -72,4 +74,22 @@ public class Global {
     public static void setResult(int result) {
         Global.result = result;
     }
+
+    public static int getVictoriesZelda() {
+        return victoriesZelda;
+    }
+
+    public static void sumVictoriesZelda() {
+        Global.victoriesZelda++;
+    }
+
+    public static int getVictoriesSF() {
+        return victoriesSF;
+    }
+
+    public static void sumVictoriesSF() {
+        Global.victoriesSF++;
+    }
+    
+    
 }

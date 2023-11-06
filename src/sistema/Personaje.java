@@ -35,6 +35,7 @@ public class Personaje {
         this.lifePoints = lifePoints;
         this.strenght = strenght;
         this.agility = agility;
+        this.game = game;
 
     }
     
@@ -74,10 +75,6 @@ public class Personaje {
 
     public String getGame() {
         return game;
-    }
-
-    public void setGame(String game) {
-        this.game = game;
     }
 
     public int getAbilities() {

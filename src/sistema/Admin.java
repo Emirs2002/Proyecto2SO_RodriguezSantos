@@ -465,6 +465,21 @@ public class Admin extends Thread {
                 case 1:
                     Nodo nodito = new Nodo(Global.getWinner());
                     winners.addAtEnd(nodito);
+                    String game = Global.getWinner().getGame();
+                    
+                    //actualizar los valores de los contadores de victorias
+                    if(game.equals("z")){
+                        Global.sumVictoriesZelda();
+                        int victoria = Global.getVictoriesZelda();
+                        
+                        this.guiHandler.getZeldaVictory().setText(Integer.toString(victoria));
+                    }else{
+                        Global.sumVictoriesSF();
+                        int victoria = Global.getVictoriesSF();
+                        
+                        this.guiHandler.getSfVictory().setText(Integer.toString(victoria));
+                    }
+                    
                     Global.setWinner(null);
                     Global.setResult(0);
                     break;
