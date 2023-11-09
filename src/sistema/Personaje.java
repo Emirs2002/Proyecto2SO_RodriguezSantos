@@ -109,6 +109,12 @@ public class Personaje {
         this.agility = agility;
     }
 
+    public ImageIcon getImagen() {
+        return imagen;
+    }
+    
+    
+
    
 
     

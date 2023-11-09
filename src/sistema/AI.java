@@ -4,6 +4,7 @@
  */
 package sistema;
 
+import interfaz.GUIHandler;
 import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,22 +19,23 @@ import utilidades.*;
 public class AI extends Thread {
 
     private String state; //decidiendo, esperando, ejecutando
-    private float time = 10; //tiempo que toma
+    private int time = 10; //tiempo que toma
     private int ZVicories;
     private int SFVictories;
     private double[] probs = {0.40, 0.27, 0.33}; //prob de ganar, prob empate, prob no combate
     private Semaphore mutex;
-//    private Personaje sfFighter;
-//    private Personaje zFighter;
-//    private Personaje winner;
+    
+    private GUIHandler gui;
 
-    public AI(Semaphore mutex) {
+    public AI(Semaphore mutex, GUIHandler gui) {
         this.mutex = mutex;
+        this.gui = gui;
     }
 
     @Override
     public void run() {
 
+        gui.getTime().setValue(time);
         while (true) {
             //COMBATIR
             try {
@@ -43,8 +45,11 @@ public class AI extends Thread {
                 System.out.println("");
 
                 System.out.println("EN COMBATE: ");
+                time = gui.getTime().getValue();
+                gui.getTimeVisual().setText(Integer.toString(time));
                 if(Global.getzFighter() != null  && Global.getSfFighter() != null)
-                {
+                {   
+                    gui.setInfo();
                     double dice = deciding();
                     combat(dice);
                 }else{
@@ -56,7 +61,7 @@ public class AI extends Thread {
                 System.out.println("SF: " + Global.getSfFighter());
                 System.out.println("Ganador: " + Global.getWinner());
                 mutex.release();
-                sleep(1000);
+                sleep(2000);
             } catch (InterruptedException ex) {
                 ex.printStackTrace(System.out);
             }

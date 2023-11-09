@@ -85,7 +85,7 @@ public class Admin extends Thread {
         while (true) {
             try {
                 checkCycle();
-                sleep(0);
+                sleep(1000);
             } catch (InterruptedException ex) {
                 ex.printStackTrace(System.out);
             }
