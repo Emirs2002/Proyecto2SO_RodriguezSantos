@@ -86,12 +86,9 @@ public class Admin extends Thread {
         this.guiHandler.formatQueues(this.sfColaArr, "sf");
 
         while (true) {
-            try {
+            
                 checkCycle();
-                sleep(1000);
-            } catch (InterruptedException ex) {
-                ex.printStackTrace(System.out);
-            }
+           
         }
     }
 

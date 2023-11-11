@@ -48,14 +48,15 @@ public class GUIHandler {
 
     JLabel sfImage;
 
-    JSlider time;
-    JTextField timeVisual;
+    JSpinner time;
+
+    JTextField status;
+    JLabel statusIcon;
 
     private JLabel[] zCharacterInfo;
-
     private JLabel[] sfCharacterInfo;
 
-    public GUIHandler(JTextArea[] colasZelda, JTextArea[] colasSf, JTextField zVictory, JTextField sfVictory) {
+    public GUIHandler(JTextArea[] colasZelda, JTextArea[] colasSf, JTextField zVictory, JTextField sfVictory, JTextField status, JLabel statusIcon) {
         this.colaZelda1 = colasZelda[0];
         this.colaZelda2 = colasZelda[1];
         this.colaZelda3 = colasZelda[2];
@@ -70,10 +71,13 @@ public class GUIHandler {
 
         this.zeldaVictory = zVictory;
         this.sfVictory = sfVictory;
+        
+        this.status = status;
+        this.statusIcon = statusIcon;
 
     }
 
-    public GUIHandler(JLabel[] zCharacterInfo, JLabel[] sfCharacterInfo, JSlider time, JTextField timeVisual) {
+    public GUIHandler(JLabel[] zCharacterInfo, JLabel[] sfCharacterInfo, JSpinner time, JTextField status, JLabel statusIcon) {
         this.zeldaId = zCharacterInfo[0];
         this.zeldaName = zCharacterInfo[1];
         this.zeldaPriority = zCharacterInfo[2];
@@ -93,7 +97,10 @@ public class GUIHandler {
         this.sfImage = sfCharacterInfo[7];
 
         this.time = time;
-        this.timeVisual = timeVisual;
+       
+
+        this.status = status;
+        this.statusIcon = statusIcon;
 
     }
 
@@ -185,13 +192,10 @@ public class GUIHandler {
         this.sfImage.setIcon(Global.getSfFighter().getImagen());
     }
 
-    public JSlider getTime() {
+    public JSpinner getTime() {
         return time;
     }
 
-    public JTextField getTimeVisual() {
-        return timeVisual;
-    }
 
     public ImageIcon makeIcon(String dir, int width, int height) {
         ImageIcon icon = new ImageIcon(new ImageIcon(getClass().getResource(dir)).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
@@ -201,13 +205,33 @@ public class GUIHandler {
     public void loser() {
         ImageIcon loser = makeIcon("/imagenes/gif_ko.gif", 140, 180);
         if ((Global.getWinner().getGame()).equals("z")) {
-            ImageIcon winner = makeIcon("/imagenes/gif_3.gif", 140, 180);
+            ImageIcon winner = makeIcon("/imagenes/gif 4.gif", 140, 180);
             this.sfImage.setIcon(loser);
             this.zeldaImage.setIcon(winner);
         } else {
             ImageIcon winner = makeIcon("/imagenes/youwin.png", 140, 180);
             this.zeldaImage.setIcon(loser);
             this.sfImage.setIcon(winner);
+        }
+
+    }
+
+    public void statusAI(String estado) {
+        this.status.setText(estado);
+        if (estado == "En combate") {
+            ImageIcon icon = makeIcon("/imagenes/peleando.gif", 220, 180);
+            this.statusIcon.setIcon(icon);
+        } else if (estado == "Hay ganador!!") {
+            ImageIcon icon = makeIcon("/imagenes/winner.gif", 140, 180);
+            this.statusIcon.setIcon(icon);
+        } else if (estado == "Empate") {
+            ImageIcon icon = makeIcon("/imagenes/tie.gif", 220, 180);
+            this.statusIcon.setIcon(icon);
+        } else if (estado == "No hay combate") {
+            ImageIcon icon = makeIcon("/imagenes/gif perder 2.gif", 200, 180);
+            this.statusIcon.setIcon(icon);
+        } else if (estado == "En espera") {
+            ImageIcon icon = makeIcon("/imagenes/gif 6.gif", 140, 180);
         }
 
     }

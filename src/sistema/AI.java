@@ -24,7 +24,8 @@ public class AI extends Thread {
     private int SFVictories;
     private double[] probs = {0.40, 0.27, 0.33}; //prob de ganar, prob empate, prob no combate
     private Semaphore mutex;
-    
+    private String status;
+
     private GUIHandler gui;
 
     public AI(Semaphore mutex, GUIHandler gui) {
@@ -45,17 +46,18 @@ public class AI extends Thread {
                 System.out.println("");
 
                 System.out.println("EN COMBATE: ");
-                time = gui.getTime().getValue();
-                gui.getTimeVisual().setText(Integer.toString(time));
-                if(Global.getzFighter() != null  && Global.getSfFighter() != null)
-                {   
+                time = (Integer)gui.getTime().getValue();
+                if (Global.getzFighter() != null && Global.getSfFighter() != null) {
                     gui.setInfo();
+                    status = "En combate";
+                    gui.statusAI(status);
                     double dice = deciding();
                     combat(dice);
-                }else{
+                    gui.statusAI(status);
+                } else {
                     System.out.println("No hay luchadores suficientes");
                 }
-                
+
                 System.out.println("Resultados: ");
                 System.out.println("Zelda: " + Global.getzFighter());
                 System.out.println("SF: " + Global.getSfFighter());
@@ -67,7 +69,6 @@ public class AI extends Thread {
             }
         }
     }
-
 
     public double deciding() {
 
@@ -92,14 +93,17 @@ public class AI extends Thread {
         if (dice <= 0.67) {
             dice = Math.random();
             if (dice >= 0.49) {
+                status = "Hay ganador!!";
                 Global.setResult(1); //hubo un ganador
                 System.out.println("HAY GANADOR");
                 winner();
             } else {
+                status = "Empate";
                 Global.setResult(2); //hubo un empate 
                 System.out.println("EMPATE");
             }
         } else {
+            status = "No hay combate";
             Global.setResult(3); //no hubo combate
             System.out.println("NO HUBO COMBATE");
         }
@@ -112,7 +116,7 @@ public class AI extends Thread {
 
         Personaje zelda = Global.getzFighter();
         Personaje SF = Global.getSfFighter();
-        
+
         int Zpoints = 0;
         int SFpoints = 0;
         double random = Math.random();
@@ -145,7 +149,7 @@ public class AI extends Thread {
             System.out.println("");
             System.out.println("ganador zelda: " + zelda);
             Global.setWinner(zelda);
-            
+
         } else if (SFpoints > Zpoints) {
             System.out.println("");
             System.out.println("ganador sf: " + SF);
@@ -156,7 +160,7 @@ public class AI extends Thread {
                 System.out.println("");
                 System.out.println("ganador zelda: " + zelda);
                 Global.setWinner(zelda);
-                
+
             } else {
                 System.out.println("");
                 System.out.println("ganador sf: " + SF);
