@@ -61,7 +61,7 @@ public class AI extends Thread {
                 System.out.println("SF: " + Global.getSfFighter());
                 System.out.println("Ganador: " + Global.getWinner());
                 mutex.release();
-                sleep(2000);
+                sleep(1000);
             } catch (InterruptedException ex) {
                 ex.printStackTrace(System.out);
             }
@@ -163,7 +163,7 @@ public class AI extends Thread {
                 Global.setWinner(SF);
             }
         }
-
+        gui.loser();
     }
 
 }

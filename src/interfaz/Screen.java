@@ -60,7 +60,7 @@ public class Screen extends javax.swing.JFrame {
         
         //Declaración clases sistema
         
-        GUIHandler guiSo = new GUIHandler(colasZelda,colasSF,victoriesZ,time);
+        GUIHandler guiSo = new GUIHandler(colasZelda,colasSF,victoriesZ,victoriesSF);
         GUIHandler guiPro = new GUIHandler(z, sf, adjustSpeed, time);
         Admin so = new Admin(mutex, zeldaArrCola, sfArrCola, zeldaRefuerzo, SFRefuerzo, this.winners,guiSo);
         AI procesador = new AI(mutex, guiPro);
@@ -223,7 +223,7 @@ public class Screen extends javax.swing.JFrame {
         zeldaName = new javax.swing.JLabel();
         zeldaPriority = new javax.swing.JLabel();
         zeldaLife = new javax.swing.JLabel();
-        victoriesSF1 = new javax.swing.JTextField();
+        victoriesSF = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         zeldaAbility = new javax.swing.JLabel();
         fondoZ = new javax.swing.JLabel();
@@ -464,31 +464,31 @@ public class Screen extends javax.swing.JFrame {
         jPanel1.add(sfAgilityLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 580, -1, -1));
 
         sfId.setForeground(new java.awt.Color(255, 255, 255));
-        sfId.setText("jLabel30");
+        sfId.setText("...");
         jPanel1.add(sfId, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 460, -1, -1));
 
         sfName.setForeground(new java.awt.Color(255, 255, 255));
-        sfName.setText("jLabel30");
+        sfName.setText("...");
         jPanel1.add(sfName, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 480, -1, -1));
 
         sfPriority.setForeground(new java.awt.Color(255, 255, 255));
-        sfPriority.setText("jLabel30");
+        sfPriority.setText("...");
         jPanel1.add(sfPriority, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 500, -1, -1));
 
         sfLife.setForeground(new java.awt.Color(255, 255, 255));
-        sfLife.setText("jLabel30");
+        sfLife.setText("...");
         jPanel1.add(sfLife, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 520, -1, -1));
 
         sfAbility.setForeground(new java.awt.Color(255, 255, 255));
-        sfAbility.setText("jLabel30");
+        sfAbility.setText("...");
         jPanel1.add(sfAbility, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 540, -1, -1));
 
         sfStrenght.setForeground(new java.awt.Color(255, 255, 255));
-        sfStrenght.setText("jLabel30");
+        sfStrenght.setText("...");
         jPanel1.add(sfStrenght, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 560, -1, -1));
 
         sfAgility.setForeground(new java.awt.Color(255, 255, 255));
-        sfAgility.setText("jLabel30");
+        sfAgility.setText("...");
         jPanel1.add(sfAgility, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 580, -1, -1));
 
         zeldaAgilityLabel.setFont(new java.awt.Font("The Wild Breath of Zelda", 0, 14)); // NOI18N
@@ -502,7 +502,7 @@ public class Screen extends javax.swing.JFrame {
         jPanel1.add(zeldaIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 460, -1, -1));
 
         zeldaAgility.setForeground(new java.awt.Color(0, 0, 0));
-        zeldaAgility.setText("jLabel30");
+        zeldaAgility.setText("...");
         jPanel1.add(zeldaAgility, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 580, -1, -1));
 
         zeldaNameLabel.setFont(new java.awt.Font("The Wild Breath of Zelda", 0, 14)); // NOI18N
@@ -531,39 +531,39 @@ public class Screen extends javax.swing.JFrame {
         jPanel1.add(zeldaLifeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 520, -1, -1));
 
         zeldaId.setForeground(new java.awt.Color(0, 0, 0));
-        zeldaId.setText("jLabel30");
+        zeldaId.setText("...");
         jPanel1.add(zeldaId, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 460, -1, -1));
 
         zeldaStrenght.setForeground(new java.awt.Color(0, 0, 0));
-        zeldaStrenght.setText("jLabel30");
+        zeldaStrenght.setText("...");
         jPanel1.add(zeldaStrenght, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 560, -1, -1));
 
         zeldaName.setForeground(new java.awt.Color(0, 0, 0));
-        zeldaName.setText("jLabel30");
+        zeldaName.setText("...");
         jPanel1.add(zeldaName, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 480, -1, -1));
 
         zeldaPriority.setForeground(new java.awt.Color(0, 0, 0));
-        zeldaPriority.setText("jLabel30");
+        zeldaPriority.setText("...");
         jPanel1.add(zeldaPriority, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 500, -1, -1));
 
         zeldaLife.setForeground(new java.awt.Color(0, 0, 0));
-        zeldaLife.setText("jLabel30");
+        zeldaLife.setText("...");
         jPanel1.add(zeldaLife, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 520, -1, -1));
 
-        victoriesSF1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        victoriesSF1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        victoriesSF1.setText("0");
-        victoriesSF1.setFocusable(false);
-        victoriesSF1.addActionListener(new java.awt.event.ActionListener() {
+        victoriesSF.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        victoriesSF.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        victoriesSF.setText("0");
+        victoriesSF.setFocusable(false);
+        victoriesSF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                victoriesSF1ActionPerformed(evt);
+                victoriesSFActionPerformed(evt);
             }
         });
-        jPanel1.add(victoriesSF1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 470, 50, 40));
+        jPanel1.add(victoriesSF, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 470, 50, 40));
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 100, 380, 320));
 
         zeldaAbility.setForeground(new java.awt.Color(0, 0, 0));
-        zeldaAbility.setText("jLabel30");
+        zeldaAbility.setText("...");
         jPanel1.add(zeldaAbility, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 540, -1, -1));
 
         fondoZ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/zelda.jpg"))); // NOI18N
@@ -597,9 +597,9 @@ public class Screen extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_zBackupLabelAncestorAdded
 
-    private void victoriesSF1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_victoriesSF1ActionPerformed
+    private void victoriesSFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_victoriesSFActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_victoriesSF1ActionPerformed
+    }//GEN-LAST:event_victoriesSFActionPerformed
 
     /**
      * @param args the command line arguments
@@ -652,7 +652,7 @@ public class Screen extends javax.swing.JFrame {
     private javax.swing.JLabel sfTitle;
     private javax.swing.JButton showWinners;
     private javax.swing.JTextField time;
-    private javax.swing.JTextField victoriesSF1;
+    private javax.swing.JTextField victoriesSF;
     private javax.swing.JLabel victoriesSfLabel;
     private javax.swing.JTextField victoriesZ;
     private javax.swing.JLabel victoriesZLabel;

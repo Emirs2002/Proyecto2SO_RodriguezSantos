@@ -1,5 +1,6 @@
 package interfaz;
 
+import java.awt.Image;
 import javax.swing.*;
 import sistema.Personaje;
 import utilidades.Cola;
@@ -46,7 +47,7 @@ public class GUIHandler {
     JLabel sfAgility;
 
     JLabel sfImage;
-    
+
     JSlider time;
     JTextField timeVisual;
 
@@ -90,7 +91,7 @@ public class GUIHandler {
         this.sfStrength = sfCharacterInfo[5];
         this.sfAgility = sfCharacterInfo[6];
         this.sfImage = sfCharacterInfo[7];
-        
+
         this.time = time;
         this.timeVisual = timeVisual;
 
@@ -164,6 +165,7 @@ public class GUIHandler {
     }
 
     public void setInfo() {
+
         this.zeldaId.setText(Global.getzFighter().getId());
         this.zeldaName.setText(Global.getzFighter().getName());
         this.zeldaPriority.setText(Integer.toString(Global.getzFighter().getPrioridad()));
@@ -190,6 +192,24 @@ public class GUIHandler {
     public JTextField getTimeVisual() {
         return timeVisual;
     }
-    
-    
+
+    public ImageIcon makeIcon(String dir, int width, int height) {
+        ImageIcon icon = new ImageIcon(new ImageIcon(getClass().getResource(dir)).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
+        return icon;
+    }
+
+    public void loser() {
+        ImageIcon loser = makeIcon("/imagenes/gif_ko.gif", 140, 180);
+        if ((Global.getWinner().getGame()).equals("z")) {
+            ImageIcon winner = makeIcon("/imagenes/gif_3.gif", 140, 180);
+            this.sfImage.setIcon(loser);
+            this.zeldaImage.setIcon(winner);
+        } else {
+            ImageIcon winner = makeIcon("/imagenes/youwin.png", 140, 180);
+            this.zeldaImage.setIcon(loser);
+            this.sfImage.setIcon(winner);
+        }
+
+    }
+
 }
