@@ -18,11 +18,7 @@ import utilidades.*;
  */
 public class AI extends Thread {
 
-    private String state; //decidiendo, esperando, ejecutando
     private int time = 10; //tiempo que toma
-    private int ZVicories;
-    private int SFVictories;
-    private double[] probs = {0.40, 0.27, 0.33}; //prob de ganar, prob empate, prob no combate
     private Semaphore mutex;
     private String status;
 
@@ -56,6 +52,7 @@ public class AI extends Thread {
                     gui.statusAI(status);
                 } else {
                     System.out.println("No hay luchadores suficientes");
+                    gui.statusAI("No hay luchadores");
                 }
 
                 System.out.println("Resultados: ");
