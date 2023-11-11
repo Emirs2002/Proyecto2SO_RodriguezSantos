@@ -55,8 +55,12 @@ public class GUIHandler {
 
     private JLabel[] zCharacterInfo;
     private JLabel[] sfCharacterInfo;
+    
+    public JLabel saleRefZ;
+    public JLabel saleRefSF;
+            
 
-    public GUIHandler(JTextArea[] colasZelda, JTextArea[] colasSf, JTextField zVictory, JTextField sfVictory, JTextField status, JLabel statusIcon) {
+    public GUIHandler(JTextArea[] colasZelda, JTextArea[] colasSf, JTextField zVictory, JTextField sfVictory, JTextField status, JLabel statusIcon, JLabel saleRefZ,JLabel saleRefSF) {
         this.colaZelda1 = colasZelda[0];
         this.colaZelda2 = colasZelda[1];
         this.colaZelda3 = colasZelda[2];
@@ -74,6 +78,9 @@ public class GUIHandler {
         
         this.status = status;
         this.statusIcon = statusIcon;
+        
+        this.saleRefZ = saleRefZ;
+        this.saleRefSF = saleRefSF;
 
     }
 
@@ -112,10 +119,10 @@ public class GUIHandler {
             String id;
             String outPut = "";
             Cola cola = colaArr[i];
+            JTextArea colaLabel = colaLabelArr[i];
 
             if (!cola.esVacio()) {
 
-                JTextArea colaLabel = colaLabelArr[i];
                 Nodo temp = cola.getFront();
 
                 while (temp != null) {
@@ -130,6 +137,8 @@ public class GUIHandler {
                 }
 
                 colaLabel.setText(outPut);
+            }else{
+                colaLabel.setText(" ");
             }
         }
 
@@ -141,10 +150,10 @@ public class GUIHandler {
 
         String id;
         String outPut = "";
+        JTextArea colaLabel = colaLabelArr[index];
 
         if (!cola.esVacio()) {
 
-            JTextArea colaLabel = colaLabelArr[index];
             Nodo temp = cola.getFront();
 
             while (temp != null) {
@@ -159,6 +168,8 @@ public class GUIHandler {
             }
 
             colaLabel.setText(outPut);
+        }else{
+            colaLabel.setText(" ");
         }
 
     }

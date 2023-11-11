@@ -60,7 +60,7 @@ public class Screen extends javax.swing.JFrame {
         
         //Declaración clases sistema
         
-        GUIHandler guiSo = new GUIHandler(colasZelda,colasSF,victoriesZ,victoriesSF, estado, AImagen);
+        GUIHandler guiSo = new GUIHandler(colasZelda,colasSF,victoriesZ,victoriesSF, estado, AImagen,saleRefuerzoZ,saleRefuerzoSF);
         GUIHandler guiPro = new GUIHandler(z, sf, adjustSpeed, estado, AImagen);
         Admin so = new Admin(mutex, zeldaArrCola, sfArrCola, zeldaRefuerzo, SFRefuerzo, this.winners,guiSo);
         AI procesador = new AI(mutex, guiPro);
@@ -223,6 +223,8 @@ public class Screen extends javax.swing.JFrame {
         adjustSpeed = new javax.swing.JSpinner();
         jLabel2 = new javax.swing.JLabel();
         zeldaLife = new javax.swing.JLabel();
+        saleRefuerzoZ = new javax.swing.JLabel();
+        saleRefuerzoSF = new javax.swing.JLabel();
         victoriesSF = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         AImagen = new javax.swing.JLabel();
@@ -541,6 +543,14 @@ public class Screen extends javax.swing.JFrame {
         zeldaLife.setText("...");
         jPanel1.add(zeldaLife, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 520, -1, -1));
 
+        saleRefuerzoZ.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        saleRefuerzoZ.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(saleRefuerzoZ, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 340, 60, 40));
+
+        saleRefuerzoSF.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        saleRefuerzoSF.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(saleRefuerzoSF, new org.netbeans.lib.awtextra.AbsoluteConstraints(818, 350, 50, 40));
+
         victoriesSF.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         victoriesSF.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         victoriesSF.setText("0");
@@ -640,6 +650,8 @@ public class Screen extends javax.swing.JFrame {
     private javax.swing.JTextArea priority3Z;
     private javax.swing.JTextArea priorityBackupSF;
     private javax.swing.JTextArea priorityBackupZ;
+    private javax.swing.JLabel saleRefuerzoSF;
+    private javax.swing.JLabel saleRefuerzoZ;
     private javax.swing.JLabel sfAbility;
     private javax.swing.JLabel sfAbilityLabel;
     private javax.swing.JLabel sfAgility;
