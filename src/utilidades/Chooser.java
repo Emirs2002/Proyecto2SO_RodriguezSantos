@@ -11,10 +11,11 @@ package utilidades;
 public class Chooser {
 
     public int dice(int tries, double[] probs) {
-        int result = 0;
         double random = 0;
+        int result = 0;
         for (int i = 0; i < tries; i++) {
             random = Math.random();
+            result = 0;
             for (int j = 0; j < probs.length; j++) {
                 if (probs[j] >= random) {
                     result += 1;
@@ -30,7 +31,7 @@ public class Chooser {
         double random = 0;
         for (int i = 0; i < tries; i++) {
             random = Math.random();
-
+            result = 0;
             if (prob >= random) {
                 result += 1;
             }

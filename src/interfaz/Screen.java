@@ -549,7 +549,7 @@ public class Screen extends javax.swing.JFrame {
 
         saleRefuerzoSF.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         saleRefuerzoSF.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(saleRefuerzoSF, new org.netbeans.lib.awtextra.AbsoluteConstraints(818, 350, 50, 40));
+        jPanel1.add(saleRefuerzoSF, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 350, 60, 40));
 
         victoriesSF.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         victoriesSF.setHorizontalAlignment(javax.swing.JTextField.CENTER);
