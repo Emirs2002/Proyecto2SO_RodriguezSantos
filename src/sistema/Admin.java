@@ -47,9 +47,6 @@ public class Admin extends Thread {
 
     public GUIHandler guiHandler;
     
-    Personaje zTemp = new Personaje("", 0, "", null, 0, 0, 0, 0, "z");
-    Personaje sfTemp = new Personaje("", 0, "", null, 0, 0, 0, 0, "sf");
-
     public Admin(Semaphore mutex, Cola[] zeldaColaArr, Cola[] sfColaArr, Cola colaRefuerzoZelda, Cola colaRefuerzoSF, Lista winners, GUIHandler gui) {
         this.cola1Zelda = zeldaColaArr[0];
         this.cola2Zelda = zeldaColaArr[1];

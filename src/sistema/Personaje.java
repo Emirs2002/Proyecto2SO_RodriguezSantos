@@ -37,19 +37,6 @@ public class Personaje {
 
     }
 
-    public Personaje(String id, int prioridad, String name, ImageIcon imagen, int abilities, int lifePoints, int strenght, int agility, String game) {
-        this.id = id;
-        this.name = name;
-        this.prioridad = prioridad;
-        this.imagen = imagen;
-        this.abilities = abilities;
-        this.lifePoints = lifePoints;
-        this.strenght = strenght;
-        this.agility = agility;
-        this.game = game;
-
-    }
-
     @Override
     public String toString() {
         return "Character{" + "id=" + id + ", prioridad=" + prioridad + ", counter=" + counter + ", name=" + name + ", abilities=" + abilities + ", lifePoints=" + lifePoints + ", strenght=" + strenght + ", agility=" + agility + '}';
