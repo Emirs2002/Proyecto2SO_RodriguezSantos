@@ -455,7 +455,7 @@ public class Screen extends javax.swing.JFrame {
 
         sfPriority.setForeground(new java.awt.Color(255, 255, 255));
         sfPriority.setText("...");
-        jPanel1.add(sfPriority, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 500, -1, -1));
+        jPanel1.add(sfPriority, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 500, -1, -1));
 
         sfLife.setForeground(new java.awt.Color(255, 255, 255));
         sfLife.setText("...");
